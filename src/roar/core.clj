@@ -98,8 +98,14 @@
         (read-key (keyword k))))
   (find-in-values!
     [this pattern]
-    (-> (:rw-strategy this)
-        (match-key! pattern)))
+    (filter
+      (fn [key]
+        (re-matches
+          (re-pattern pattern)
+          (name key)
+          ))
+      (map (fn [[k v]] v ) @(-> this :rw-strategy :store))
+      ))
   (find-in-keys!
     [this pattern]
     (filter
