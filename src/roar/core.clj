@@ -216,9 +216,9 @@
     (println command)
     (cond
       (= command :get) ( read!  master data )
-      (= command :set) ( write! master (str length " " data) data )
-      (= command :match-key) ( find-in-keys!  master data )
-      (= command :match-key) ( find-in-keys!  master data )
+      (= command :set) ( write! master data data )
+      (= command :match-key)   ( find-in-keys!    master data )
+      (= command :match-value) ( find-in-values!  master data )
       :else nil
       ))
   )
@@ -231,3 +231,14 @@
     ;(println (first (roar.protocol/byteToBitString (get x 1))))
   ;(recur)
   ))
+
+(defn -main
+  []
+  (let [
+        cmd    (read-line)
+        length (getLength  cmd)
+        ]
+    (println (str (execute cmd length)))
+    ;(println (first (roar.protocol/byteToBitString (get x 1))))
+    (recur)
+    ))

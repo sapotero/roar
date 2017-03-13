@@ -24,7 +24,7 @@
 (defn- ^BigInteger bytes2int
   [^bytes bytes & {:keys [little-endian]
                    :or {little-endian true}}]
-  (let [b (if little-endian (reverse bytes) bytes)]
+  (let [b (if little-endian bytes  (reverse bytes))]
     (->> b
          (cons (byte 0))
          (byte-array)
