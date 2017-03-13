@@ -54,6 +54,8 @@
     )
   )
 
+
+; http://cr.yp.to/cdb.html
 (extend-type OnDiskReadWrite ReadWrite
   (write-key!
     [this k v]
