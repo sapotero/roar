@@ -22,9 +22,39 @@
 
 (defrecord Master [rw-strategy name slaves])
 (defrecord Slave  [rw-strategy name master])
+
 (defrecord InMemoryReadWrite [store])
+(defrecord OnDiskReadWrite   [store])
 
 (extend-type InMemoryReadWrite ReadWrite
+  (write-key!
+    [this k v]
+    (-> (:store this)
+        (swap! conj {(keyword k) v})))
+  (read-key
+    [this k]
+    (-> @(:store this)
+        ((keyword k))))
+  (replicate-key!
+    [this k v]
+    (-> (:store this)
+        (swap! conj {(keyword k) v})))
+  (match-key!
+    [this pattern]
+    (-> @(:store this)
+        ((keyword pattern))
+        ;(doseq [[key val] :store] (prn key val))
+        ))
+  (match-value!
+    [this pattern]
+    ()
+    ;(-> @(:store this)
+    ;    ((map #( (prn )) seq))
+    ;    )
+    )
+  )
+
+(extend-type OnDiskReadWrite ReadWrite
   (write-key!
     [this k v]
     (-> (:store this)
@@ -119,22 +149,32 @@
   [name]
   (Master. (InMemoryReadWrite.  (atom {})) name (atom [])))
 
-(defn slave-node
+(defn slave-memory-node
   ([name]
    (Slave. (InMemoryReadWrite. (atom {})) name (atom {})))
   ([name master]
    {:pre [(satisfies? MasterNode master)]}
    (Slave. (InMemoryReadWrite. (atom {})) name (atom master))))
 
+(defn slave-disk-node
+  ([name]
+   (Slave. (OnDiskReadWrite (atom {})) name (atom {})))
+  ([name master]
+   {:pre [(satisfies? MasterNode master)]}
+   (Slave. (OnDiskReadWrite. (atom {})) name (atom master))))
 
-(def master (roar.core/master-node "master"))
-(def slave1 (roar.core/slave-node  "slave1"))
-(def slave2 (roar.core/slave-node  "slave2"))
+(def master  (roar.core/master-node "master"))
+(def memory1 (roar.core/slave-memory-node "memory1"))
+(def memory2 (roar.core/slave-memory-node "memory2"))
+(def disk1   (roar.core/slave-disk-node   "disk2"))
 
-(roar.core/add-slave! master slave1 )
-(roar.core/add-slave! master slave2 )
+(roar.core/add-slave! master memory1)
+(roar.core/add-slave! master memory2)
+(roar.core/add-slave! master disk1)
+
 (roar.core/write! master "key" "test23")
 
-(= (roar.core/read! slave1 "key" ) "test23")
-(= (roar.core/read! slave2 "key" ) "test")
-(= (roar.core/read! master "key" ) "test")
+(= (roar.core/read! memory1 "key") "test23")
+(= (roar.core/read! memory2 "key") "test23")
+(= (roar.core/read! disk1   "key") "test23")
+(= (roar.core/read! master  "key") "test23")
