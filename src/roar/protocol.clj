@@ -14,8 +14,10 @@
 (defn getCommandType [header]
   (let [code (.codePointAt (str header) 0)]
     (cond
-      (= code 001) :get
-      (= code 002) :set
+      (= code 001) :set
+      (= code 002) :get
+      (= code 003) :match-key
+      (= code 004) :match-value
       :else nil
     )))
 

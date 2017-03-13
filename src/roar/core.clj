@@ -211,6 +211,8 @@
     (cond
       (= command :get) ( read!  master data )
       (= command :set) ( write! master (str length " " data) data )
+      (= command :match-key) ( find-in-keys!  master data )
+      (= command :match-key) ( find-in-keys!  master data )
       :else nil
       ))
   )
@@ -218,10 +220,8 @@
 (defn main
   [z]
   {:pre [(and (>= (count z) 3)) ]}
-  (let [
-        length  (getLength  z)
-        ]
-    (execute z length)
+  (let [ length  (getLength  z) ]
+    (println (str (execute z length)))
     ;(println (first (roar.protocol/byteToBitString (get x 1))))
   ;(recur)
   ))
