@@ -1,4 +1,5 @@
 (ns roar.core  (:gen-class) )
+(require '[roar.protocol :as proto])
 
 (defprotocol Node
   (write!       [this k v])
@@ -181,16 +182,46 @@
 (roar.core/add-slave! master memory1)
 (roar.core/add-slave! master memory2)
 ;(roar.core/add-slave! master disk1)
+;
+;(roar.core/write! master "key"    "test23")
+;(roar.core/write! master "key1"   "test231")
+;(roar.core/write! memory1 "key11" "test231")
+;(roar.core/write! memory2 "key21" "test231")
+;
+;(= (roar.core/read! memory1 "key") "test23")
+;(= (roar.core/read! memory2 "key") "test23")
+;;(= (roar.core/read! disk1   "key") "test23")
+;(= (roar.core/read! master  "key") "test23")
 
-(roar.core/write! master "key"    "test23")
-(roar.core/write! master "key1"   "test231")
-(roar.core/write! memory1 "key11" "test231")
-(roar.core/write! memory2 "key21" "test231")
+(defn getLength [command]
+  (proto/getLength (str command))
+  )
 
-(= (roar.core/read! memory1 "key") "test23")
-(= (roar.core/read! memory2 "key") "test23")
-;(= (roar.core/read! disk1   "key") "test23")
-(= (roar.core/read! master  "key") "test23")
+(defn execute
+  [z length]
+  ; проверка на длинну
+  {:pre []}
 
+  (let
+    [
+     command (proto/getCommandType (get z 0))
+     data    (proto/getData z length)
+     ]
+    (println command)
+    (cond
+      (= command :get) ( read!  master data )
+      (= command :set) ( write! master (str length " " data) data )
+      :else nil
+      ))
+  )
 
-(defn -main []  (find-in-keys! master "key" ))
+(defn main
+  [z]
+  {:pre [(and (>= (count z) 3)) ]}
+  (let [
+        length  (getLength  z)
+        ]
+    (execute z length)
+    ;(println (first (roar.protocol/byteToBitString (get x 1))))
+  ;(recur)
+  ))

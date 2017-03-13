@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9e13a0a5-9ba5-400b-87d4-c95f5cfdb204" name="Default" comment="" />
+    <list default="true" id="9e13a0a5-9ba5-400b-87d4-c95f5cfdb204" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/roar/protocol.clj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/replstate.xml" afterPath="$PROJECT_DIR$/.idea/replstate.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/roar/core.clj" afterPath="$PROJECT_DIR$/src/roar/core.clj" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,16 +20,26 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="core.clj" pinned="false" current-in-tab="true">
+      <file leaf-file-name="core.clj" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/roar/core.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="6" lean-forward="true" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+            <state relative-caret-position="595">
+              <caret line="209" column="21" lean-forward="true" selection-start-line="209" selection-start-column="21" selection-end-line="209" selection-end-column="21" />
               <folding>
-                <element signature="e#2452#2883#0" expanded="false" />
-                <element signature="e#2885#3363#0" expanded="false" />
-                <element signature="e#3454#3670#0" expanded="false" />
+                <element signature="e#2489#2920#0" expanded="false" />
+                <element signature="e#2922#3400#0" expanded="false" />
+                <element signature="e#3491#3707#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="protocol.clj" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/roar/protocol.clj">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="495">
+              <caret line="33" column="3" lean-forward="true" selection-start-line="33" selection-start-column="3" selection-end-line="33" selection-end-column="3" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -32,8 +47,8 @@
       <file leaf-file-name="project.clj" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="21" lean-forward="false" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
+            <state relative-caret-position="180">
+              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -80,13 +95,21 @@
         <option value="$PROJECT_DIR$/src/roar/command.clj" />
         <option value="$PROJECT_DIR$/project.clj" />
         <option value="$PROJECT_DIR$/src/roar/core.clj" />
+        <option value="$PROJECT_DIR$/src/roar/protocol.clj" />
       </list>
     </option>
   </component>
+  <component name="MavenProjectNavigator">
+    <treeState />
+  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1920" />
-    <option name="width" value="1918" />
-    <option name="height" value="1045" />
+    <option name="x" value="1918" />
+    <option name="y" value="-3" />
+    <option name="width" value="1924" />
+    <option name="height" value="1052" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -167,7 +190,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
-  <component name="ReplState" timestamp="1489406477465">{:repl-history {:ide [], :local [&quot;(roar.core/read roar.core/slave1 \&quot;keys\&quot;)&quot; &quot;(roar.core/read roar.core/slave2 \&quot;keys\&quot;)&quot; &quot;(roar.core/read roar.core/master \&quot;keys\&quot;)&quot; &quot;(roar.core/write! roar.core/slave1 \&quot;keyss\&quot; \&quot;kess\&quot;)&quot; &quot;(roar.core/read roar.core/master \&quot;keyss\&quot;)&quot; &quot;(roar.core/read roar.core/slave1 \&quot;keyss\&quot;)&quot; &quot;(read faker.internet)&quot; &quot;(require faker)&quot; &quot;(require 'faker)&quot; &quot;(roar.core/n)&quot; &quot;(= (roar.core/read! master \&quot;key\&quot; ) \&quot;test\&quot;)&quot; &quot;(roar.core/add-slave! master slave1 )\n(roar.core/add-slave! master slave2 )&quot; &quot;\n(roar.core/write! master \&quot;key\&quot; \&quot;test23\&quot;)&quot; &quot;\nmaster&quot; &quot;roar.core/master&quot; &quot;(:store roar.core/master)&quot; &quot;(:slaves roar.core/master)&quot; &quot;(= (roar.core/read! roar.core/master \&quot;key\&quot; ) \&quot;test\&quot;)&quot; &quot;(= (roar.core/read! roar.core/master \&quot;key\&quot; ) \&quot;test23\&quot;)&quot; &quot;(= (roar.core/read! roar.core/slave1 \&quot;key\&quot; ) \&quot;test23\&quot;)&quot; &quot;(= (roar.core/read! roar.core/slave2 \&quot;key\&quot; ) \&quot;test23\&quot;)&quot; &quot;(roar.core/match-value! roar.core/master-node \&quot;key\&quot;)&quot; &quot;(roar.core/match-key! roar.core/master-node \&quot;key\&quot;)&quot; &quot;(roar.core/match-key! roar.core/master \&quot;key\&quot;)&quot; &quot;(roar.core/match-value! roar.core/master \&quot;key\&quot;)&quot; &quot;(roar.core/match-value! roar.core/slave1 \&quot;key\&quot;)&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;key\&quot;)&quot; &quot;(def ss (agent 1))&quot; &quot;ss&quot; &quot;(send inc ss)&quot; &quot;(send ss inc)&quot; &quot;@ss&quot; &quot;(def atom (atom {}))&quot; &quot;(def atoms (atom {}))&quot; &quot;(def a (atom {}))&quot; &quot;(let [re (fn [coll] (reduce (fn [val acc] (prn val )) coll ))]\n  (swap! a re  )\n  )&quot; &quot;(def te (atom 1))&quot; &quot;(swap! te inc)&quot; &quot;@te&quot; &quot;(swap! (fn [x] (assoc x \&quot;a\&quot; 1)) te)&quot; &quot;(defn qq [x] (assoc x \&quot;a\&quot; 1))&quot; &quot;(qq {})&quot; &quot;(swap! qq te)&quot; &quot;(swap! te qq)&quot; &quot;(-&gt; qq te)&quot; &quot;(-&gt; qq .te)&quot; &quot;(-&gt; te .qq)&quot; &quot;(-&gt; te qq)&quot; &quot;(-&gt; te )&quot; &quot;(swap! te assoc :a 1)&quot; &quot;te&quot; &quot;(swap! a assoc :a 1)&quot; &quot;(swap! a qq)&quot; &quot;(swap! a (fn [x] (assoc x \&quot;a\&quot; 1)))&quot; &quot;(swap! a (fn [col] (reduce (fn [val acc] (prn val) ) col)))&quot; &quot;(roar.core/find-in-values! roar.core/memory1 \&quot;key\&quot; )&quot; &quot;(roar.core/read! roar.core/master \&quot;key\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;key\&quot; )&quot; &quot;((fn [col] (reduce conj {} col) {:a 1})&quot; &quot;((fn [col] (reduce conj {} col) {:a 1}))&quot; &quot;(reduce conj {} {:a 1})&quot; &quot;(reduce conj {.c 2} {:a 1})&quot; &quot;(reduce conj {:c 2} {:a 1})&quot; &quot;a&quot; &quot;@a&quot; &quot;(def at (atom {}))&quot; &quot;(def at (atom {:a 1}))&quot; &quot;(swap! at (fn [col] (reduce conj {} col)))&quot; &quot;(def at (atom {:store (atom {})}))&quot; &quot;(-&gt; @(:store at))&quot; &quot;(-&gt; (:store at))&quot; &quot;@@at&quot; &quot;at&quot; &quot;@at&quot; &quot;(:store @at)&quot; &quot;(-&gt; at :store)&quot; &quot;(-&gt; @at :store)&quot; &quot;(-&gt; (:store @at) (swap! conj))&quot; &quot;(-&gt; (:store @at) (swap! conj {}))&quot; &quot;(-&gt; (:store @at) (swap! conj {:a 1}))&quot; &quot;(-&gt; (:store @at) (swap! conj {:a 11}))&quot; &quot;@(:store @at)&quot; &quot;(-&gt; (:store @at) (swap! conj {:aa 11}))&quot; &quot;(-&gt; (:store @at) (swap! conj {:aba 11}))&quot; &quot;(str #\&quot;\&quot; \&quot;pattern\&quot;)&quot; &quot;#\&quot;patter\&quot;&quot; &quot;\n(= (roar.core/read! memory1 \&quot;key\&quot;) \&quot;test23\&quot;)&quot; &quot;(roar.core/master)&quot; &quot;(roar.core/memory1)&quot; &quot;(roar.core/memory2)&quot; &quot;(= (roar.core/read! roar.core/memory1 \&quot;key\&quot;) \&quot;test23\&quot;)&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;test23\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;.+\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;.*\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;\\w+\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;\\w+\\r\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;\\w+\\r\\n\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;test\&quot; )&quot; &quot;(atom {})&quot; &quot;(conj nil \&quot;asd\&quot;)&quot; &quot;(roar.core/-main)&quot;], :remote []}}</component>
+  <component name="ReplState" timestamp="1489418826125">{:repl-history {:ide [], :local [&quot;(roar.core/read roar.core/master \&quot;keys\&quot;)&quot; &quot;(roar.core/write! roar.core/slave1 \&quot;keyss\&quot; \&quot;kess\&quot;)&quot; &quot;(roar.core/read roar.core/master \&quot;keyss\&quot;)&quot; &quot;(roar.core/read roar.core/slave1 \&quot;keyss\&quot;)&quot; &quot;(read faker.internet)&quot; &quot;(require faker)&quot; &quot;(require 'faker)&quot; &quot;(roar.core/n)&quot; &quot;(= (roar.core/read! master \&quot;key\&quot; ) \&quot;test\&quot;)&quot; &quot;(roar.core/add-slave! master slave1 )\n(roar.core/add-slave! master slave2 )&quot; &quot;\n(roar.core/write! master \&quot;key\&quot; \&quot;test23\&quot;)&quot; &quot;\nmaster&quot; &quot;roar.core/master&quot; &quot;(:store roar.core/master)&quot; &quot;(:slaves roar.core/master)&quot; &quot;(= (roar.core/read! roar.core/master \&quot;key\&quot; ) \&quot;test\&quot;)&quot; &quot;(= (roar.core/read! roar.core/master \&quot;key\&quot; ) \&quot;test23\&quot;)&quot; &quot;(= (roar.core/read! roar.core/slave1 \&quot;key\&quot; ) \&quot;test23\&quot;)&quot; &quot;(= (roar.core/read! roar.core/slave2 \&quot;key\&quot; ) \&quot;test23\&quot;)&quot; &quot;(roar.core/match-value! roar.core/master-node \&quot;key\&quot;)&quot; &quot;(roar.core/match-key! roar.core/master-node \&quot;key\&quot;)&quot; &quot;(roar.core/match-key! roar.core/master \&quot;key\&quot;)&quot; &quot;(roar.core/match-value! roar.core/master \&quot;key\&quot;)&quot; &quot;(roar.core/match-value! roar.core/slave1 \&quot;key\&quot;)&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;key\&quot;)&quot; &quot;(def ss (agent 1))&quot; &quot;(send inc ss)&quot; &quot;(send ss inc)&quot; &quot;@ss&quot; &quot;(def atom (atom {}))&quot; &quot;(def atoms (atom {}))&quot; &quot;(def a (atom {}))&quot; &quot;(let [re (fn [coll] (reduce (fn [val acc] (prn val )) coll ))]\n  (swap! a re  )\n  )&quot; &quot;(def te (atom 1))&quot; &quot;(swap! te inc)&quot; &quot;@te&quot; &quot;(swap! (fn [x] (assoc x \&quot;a\&quot; 1)) te)&quot; &quot;(defn qq [x] (assoc x \&quot;a\&quot; 1))&quot; &quot;(qq {})&quot; &quot;(swap! qq te)&quot; &quot;(swap! te qq)&quot; &quot;(-&gt; qq te)&quot; &quot;(-&gt; qq .te)&quot; &quot;(-&gt; te .qq)&quot; &quot;(-&gt; te qq)&quot; &quot;(-&gt; te )&quot; &quot;(swap! te assoc :a 1)&quot; &quot;te&quot; &quot;(swap! a assoc :a 1)&quot; &quot;(swap! a qq)&quot; &quot;(swap! a (fn [x] (assoc x \&quot;a\&quot; 1)))&quot; &quot;(swap! a (fn [col] (reduce (fn [val acc] (prn val) ) col)))&quot; &quot;(roar.core/find-in-values! roar.core/memory1 \&quot;key\&quot; )&quot; &quot;(roar.core/read! roar.core/master \&quot;key\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;key\&quot; )&quot; &quot;((fn [col] (reduce conj {} col) {:a 1})&quot; &quot;((fn [col] (reduce conj {} col) {:a 1}))&quot; &quot;(reduce conj {} {:a 1})&quot; &quot;(reduce conj {.c 2} {:a 1})&quot; &quot;(reduce conj {:c 2} {:a 1})&quot; &quot;a&quot; &quot;@a&quot; &quot;(def at (atom {}))&quot; &quot;(def at (atom {:a 1}))&quot; &quot;(swap! at (fn [col] (reduce conj {} col)))&quot; &quot;(def at (atom {:store (atom {})}))&quot; &quot;(-&gt; @(:store at))&quot; &quot;(-&gt; (:store at))&quot; &quot;@@at&quot; &quot;at&quot; &quot;@at&quot; &quot;(:store @at)&quot; &quot;(-&gt; at :store)&quot; &quot;(-&gt; @at :store)&quot; &quot;(-&gt; (:store @at) (swap! conj))&quot; &quot;(-&gt; (:store @at) (swap! conj {}))&quot; &quot;(-&gt; (:store @at) (swap! conj {:a 1}))&quot; &quot;(-&gt; (:store @at) (swap! conj {:a 11}))&quot; &quot;@(:store @at)&quot; &quot;(-&gt; (:store @at) (swap! conj {:aa 11}))&quot; &quot;(-&gt; (:store @at) (swap! conj {:aba 11}))&quot; &quot;(str #\&quot;\&quot; \&quot;pattern\&quot;)&quot; &quot;#\&quot;patter\&quot;&quot; &quot;\n(= (roar.core/read! memory1 \&quot;key\&quot;) \&quot;test23\&quot;)&quot; &quot;(roar.core/master)&quot; &quot;(roar.core/memory1)&quot; &quot;(roar.core/memory2)&quot; &quot;(= (roar.core/read! roar.core/memory1 \&quot;key\&quot;) \&quot;test23\&quot;)&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;test23\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;.+\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;.*\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;\\w+\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;\\w+\\r\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;\\w+\\r\\n\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;test\&quot; )&quot; &quot;(atom {})&quot; &quot;(conj nil \&quot;asd\&quot;)&quot; &quot;(roar.core/-main)&quot; &quot;send&quot; &quot;s&quot; &quot;ss&quot;], :remote []}}</component>
   <component name="RunManager" selected="Clojure REPL.repl">
     <configuration default="false" name="node" type="ClojureScriptRunConfiguration" factoryName="Clojure Script" temporary="true">
       <module name="roar" />
@@ -444,7 +467,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1920" y="0" width="1918" height="1045" extended-state="4" />
+    <frame x="1918" y="-3" width="1924" height="1052" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -455,16 +478,16 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="REPL" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4246795" sideWeight="0.64444447" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959402" sideWeight="0.49555555" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="REPL" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.43823215" sideWeight="0.6485623" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30444443" sideWeight="0.48939395" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Leiningen" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43856838" sideWeight="0.35555556" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Leiningen" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43856838" sideWeight="0.3514377" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17147435" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17092651" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -487,19 +510,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/roar/core.clj</url>
-          <line>17</line>
-          <properties />
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/roar/core.clj</url>
-          <line>16</line>
-          <properties />
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/roar/core.clj</url>
-          <line>84</line>
+          <line>85</line>
           <properties />
           <option name="timeStamp" value="20" />
         </line-breakpoint>
@@ -507,7 +518,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="21" />
+      <option name="time" value="22" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -521,9 +532,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2452#2883#0" expanded="false" />
-            <element signature="e#2885#3363#0" expanded="false" />
-            <element signature="e#3454#3670#0" expanded="false" />
+            <element signature="e#2489#2920#0" expanded="false" />
+            <element signature="e#2922#3400#0" expanded="false" />
+            <element signature="e#3491#3707#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -533,9 +544,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2452#2883#0" expanded="false" />
-            <element signature="e#2885#3363#0" expanded="false" />
-            <element signature="e#3454#3670#0" expanded="false" />
+            <element signature="e#2489#2920#0" expanded="false" />
+            <element signature="e#2922#3400#0" expanded="false" />
+            <element signature="e#3491#3707#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -546,9 +557,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2452#2883#0" expanded="false" />
-            <element signature="e#2885#3363#0" expanded="false" />
-            <element signature="e#3454#3670#0" expanded="false" />
+            <element signature="e#2489#2920#0" expanded="false" />
+            <element signature="e#2922#3400#0" expanded="false" />
+            <element signature="e#3491#3707#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -595,22 +606,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="21" lean-forward="false" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/clojure/clojure/1.8.0/clojure-1.8.0.jar!/clojure/core.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="6526" column="6" lean-forward="false" selection-start-line="6526" selection-start-column="6" selection-end-line="6526" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/lang/ClassLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="337">
@@ -635,15 +630,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///tmp/form-init8613868109734940619.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="872" lean-forward="false" selection-start-line="0" selection-start-column="872" selection-end-line="0" selection-end-column="872" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/clojure/clojure/1.8.0/clojure-1.8.0.jar!/clojure/core.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="822" column="10" lean-forward="false" selection-start-line="822" selection-start-column="10" selection-end-line="822" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/roar/core.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="6" lean-forward="true" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+        <state relative-caret-position="595">
+          <caret line="209" column="21" lean-forward="true" selection-start-line="209" selection-start-column="21" selection-end-line="209" selection-end-column="21" />
           <folding>
-            <element signature="e#2452#2883#0" expanded="false" />
-            <element signature="e#2885#3363#0" expanded="false" />
-            <element signature="e#3454#3670#0" expanded="false" />
+            <element signature="e#2489#2920#0" expanded="false" />
+            <element signature="e#2922#3400#0" expanded="false" />
+            <element signature="e#3491#3707#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/roar/protocol.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" column="3" lean-forward="true" selection-start-line="33" selection-start-column="3" selection-end-line="33" selection-end-column="3" />
+          <folding />
         </state>
       </provider>
     </entry>
