@@ -77,11 +77,11 @@
     [this pattern]
     (-> @(:store this)
         ((str pattern)))
-        ;(swap! conj (atom  {:test true}))
-        ;(fn [col] (reduce conj {} col)))
-        )
+    ;(swap! conj (atom  {:test true}))
+    ;(fn [col] (reduce conj {} col)))
     )
-  ;)
+  )
+;)
 
 (extend-type Master Node
   (write!
@@ -98,24 +98,24 @@
         (read-key (keyword k))))
   (find-in-values!
     [this pattern]
-    (filter
-      (fn [key]
-        (re-matches
-          (re-pattern pattern)
-          (name key)
-          ))
-      (map (fn [[k v]] v ) @(-> this :rw-strategy :store))
-      ))
+    (sync nil (set (filter
+                     (fn [key]
+                       (re-matches
+                         (re-pattern pattern)
+                         (name key)
+                         ))
+                     (map (fn [[k v]] v ) @(-> this :rw-strategy :store))
+                     ))))
   (find-in-keys!
     [this pattern]
-    (filter
-      (fn [key]
-        (re-matches
-          (re-pattern pattern)
-          (name key)
-          ))
-      (keys @(-> this :rw-strategy :store) )
-      )))
+    (sync nil (set (filter
+                     (fn [key]
+                       (re-matches
+                         (re-pattern pattern)
+                         (name key)
+                         ))
+                     (keys @(-> this :rw-strategy :store) )
+                     )))))
 
 
 (extend-type Master MasterNode
@@ -176,10 +176,6 @@
 ;   {:pre [(satisfies? MasterNode master)]}
 ;   (Slave. (OnDiskReadWrite. (atom {})) name (atom master))))
 
-
-
-
-
 (def master  (roar.core/master-node "master"))
 (def memory1 (roar.core/slave-memory-node "memory1"))
 (def memory2 (roar.core/slave-memory-node "memory2"))
@@ -229,8 +225,8 @@
   (let [ length  (getLength  z) ]
     (println (str (execute z length)))
     ;(println (first (roar.protocol/byteToBitString (get x 1))))
-  ;(recur)
-  ))
+    ;(recur)
+    ))
 
 (defn -main
   []
@@ -238,7 +234,9 @@
         cmd    (read-line)
         length (getLength  cmd)
         ]
-    (println (str (execute cmd length)))
+    (if (>= (count cmd) 3)
+      (println (str (execute cmd length)))
+      nil)
     ;(println (first (roar.protocol/byteToBitString (get x 1))))
     (recur)
     ))
