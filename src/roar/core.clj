@@ -230,11 +230,6 @@
 
 (defn -main
   []
-  (let [
-        cmd (read-line)
-        ]
-    (if (>= (count cmd) 3)
-      (println (str (roar.protocol/parse-frame cmd)))
-      nil)
-    ;(println (first (roar.protocol/byteToBitString (get x 1))))
-    (recur)))
+  (let [ cmd (read-line) ]
+    (roar.protocol/parse-frame cmd))
+  (recur))

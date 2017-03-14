@@ -217,15 +217,19 @@
      id      (bytes-to-int (subvec package 0 2))
      command (bytes-to-int (subvec package 2 3))
      length  (bytes-to-int (subvec package 3 35))
-     data    (parse-data (subvec package 35 (+ 35 length)))
+     data    (parse-data   (subvec package 35 (+ 35 length)))
      ]
-    (println (conj {}  {
-       :id      id
-       :command command
-       :length  length
-       :data    data
-       }))))
-
+    (sync
+      nil
+      (println
+        (conj
+          {}
+          {
+           :id      id
+           :command command
+           :length  length
+           :data    data
+           })))))
 (defn parse-raw-frame
   [byte-array]
   (let
@@ -234,9 +238,9 @@
      id      (bytes-to-int (subvec package 0 2))
      command (bytes-to-int (subvec package 2 3))
      length  (bytes-to-int (subvec package 3 35))
-     data    (parse-data (subvec package 35 (+ 35 length)))
+     data    (parse-data   (subvec package 35 (+ 35 length)))
      ]
-    (println
+    (sync nil (println
       (conj
         {}
         {
@@ -244,4 +248,4 @@
           :command command
           :length  length
           :data    data
-          }))))
+          })))))
