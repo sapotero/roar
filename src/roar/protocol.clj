@@ -74,3 +74,57 @@
                     (comp byte int) "123456"
                     )))))
     ))
+
+
+
+
+(defn bytes-to-int [bytes]
+  (->>
+    bytes
+    (map (partial format "%02x"))
+    (apply (partial str "0x"))
+    read-string))
+
+
+(defn test-buffer
+  [string]
+  (vec (byte-array (map (comp byte int) string))))
+
+
+
+(defn parse-data
+  [string]
+  (let
+    [
+     package (test-buffer string)
+     type    (bytes-to-int (subvec package 0 1))
+     key-length  (bytes-to-int (subvec package 1 17))
+     key     (String. (byte-array (subvec package 17 key-length)))
+     value-length  (bytes-to-int (subvec package (+ key-length 17) (+ key-length 17 16)))
+     value     (String. (byte-array (subvec package (+ key-length 17 16) value-length)))
+     ]
+    (conj {} {
+        :type         type
+        :key-length   key-length
+        :key          key
+        :value-length value-length
+        :value        value
+       })))
+
+(defn parse-frame
+  [string]
+  {:pre (>= (count string) 40)}
+  (let
+    [
+     package (test-buffer string)
+     id      (bytes-to-int (subvec package 0 2))
+     command (bytes-to-int (subvec package 2 3))
+     length  (bytes-to-int (subvec package 3 35))
+     data    (->> (parse-data (subvec package 35 (count package))))
+     ]
+    (println (conj {}  {
+       :id      id
+       :command command
+       :length  length
+       :data    data
+       }))))

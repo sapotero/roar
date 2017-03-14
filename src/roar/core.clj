@@ -232,11 +232,9 @@
   []
   (let [
         cmd    (read-line)
-        length (getLength  cmd)
         ]
     (if (>= (count cmd) 3)
-      (println (str (execute cmd length)))
+      (println (str (roar.protocol/parse-frame cmd)))
       nil)
     ;(println (first (roar.protocol/byteToBitString (get x 1))))
-    (recur)
-    ))
+    (recur)))
