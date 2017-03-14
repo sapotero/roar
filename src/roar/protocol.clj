@@ -211,6 +211,7 @@
 (defn parse-frame
   [string]
   {:pre (>= (count string) 40)}
+  (println "recv: " string)
   (let
     [
      package (test-buffer string)

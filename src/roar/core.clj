@@ -226,5 +226,5 @@
 (defn -main
   []
   (let [ cmd (read-line) ]
-    (roar.protocol/parse-frame cmd))
+    (execute (roar.protocol/parse-frame cmd)))
   (recur))
