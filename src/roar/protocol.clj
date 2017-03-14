@@ -1,5 +1,4 @@
-(ns roar.protocol)
-
+(ns roar.protocol (:import (java.nio ByteBuffer ByteOrder)))
 (require 'clojure.pprint)
 
 (defn stringToByte
@@ -39,3 +38,39 @@
   ; проверка
   (.substring z 3 (count z))
   )
+
+(defn- with-native-order [^ByteBuffer buf]
+  (.order buf (ByteOrder/LITTLE_ENDIAN)))
+
+(defn buffer
+  [^long size]
+  (with-native-order (ByteBuffer/allocate size)))
+
+(defn decode
+  [^ByteBuffer buffer]
+  (let
+    [
+     command (.get      (with-native-order buffer)  )
+     length  (.getShort (with-native-order buffer) 1)
+     nb      (bytes (byte-array length))
+     ;data    (.get buffer)
+     data    (.get (with-native-order buffer) nb 1 3)
+     ]
+    (set {
+          :command command,
+          :length length,
+          :data data,
+          :nb nb
+          })))
+(defn testa
+  []
+  (conj
+    {}
+    (decode
+      (ByteBuffer/wrap
+              (bytes
+                (byte-array
+                  (map
+                    (comp byte int) "123456"
+                    )))))
+    ))
