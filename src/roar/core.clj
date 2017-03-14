@@ -225,6 +225,6 @@
 
 (defn -main
   []
-  (doseq [ln (line-seq (java.io.BufferedReader. *in*))]
-    (execute (roar.protocol/parse-frame ln)))
+  (let [ cmd (read-line) ]
+    (execute (roar.protocol/parse-frame cmd)))
   (recur))
