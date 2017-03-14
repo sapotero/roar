@@ -231,7 +231,7 @@
 (defn -main
   []
   (let [
-        cmd    (read-line)
+        cmd (read-line)
         ]
     (if (>= (count cmd) 3)
       (println (str (roar.protocol/parse-frame cmd)))

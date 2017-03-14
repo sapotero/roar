@@ -96,12 +96,12 @@
   [string]
   (let
     [
-     package (test-buffer string)
-     type    (bytes-to-int (subvec package 0 1))
-     key-length  (bytes-to-int (subvec package 1 17))
-     key     (String. (byte-array (subvec package 17 key-length)))
-     value-length  (bytes-to-int (subvec package (+ key-length 17) (+ key-length 17 16)))
-     value     (String. (byte-array (subvec package (+ key-length 17 16) value-length)))
+     package      (test-buffer string)
+     type         (bytes-to-int (subvec package 0 1))
+     key-length   (bytes-to-int (subvec package 1 17))
+     key          (String. (byte-array (subvec package 17 (+ 17 key-length))))
+     value-length (bytes-to-int (subvec package (+ key-length 17) (+ key-length 17 16)))
+     value        (String. (byte-array (subvec package (+ key-length 17 16) (+ key-length value-length 17 16))))
      ]
     (conj {} {
         :type         type
@@ -110,6 +110,89 @@
         :value-length value-length
         :value        value
        })))
+
+(defn generate-packet
+  []
+  (byte-array
+    [
+     (byte 106)
+     (byte 81)
+     (byte 1)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 41)
+     (byte 1)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 3)
+     (byte 107)
+     (byte 101)
+     (byte 121)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 0)
+     (byte 5)
+     (byte 118)
+     (byte 97)
+     (byte 108)
+     (byte 117)
+     (byte 101)
+     (byte 10)
+     ]))
 
 (defn parse-frame
   [string]
@@ -128,3 +211,24 @@
        :length  length
        :data    data
        }))))
+
+(defn parse-raw-frame
+  [byte-array]
+  (let
+    [
+     package (vec byte-array)
+     id      (bytes-to-int (subvec package 0 2))
+     command (bytes-to-int (subvec package 2 3))
+     length  (bytes-to-int (subvec package 3 35))
+     ;data    (subvec package 35 (+ 35 length))
+     data    (->> (parse-data (subvec package 35 (+ 35 length))))
+     ]
+    (println
+      (conj
+        {}
+        {
+          :id      id
+          :command command
+          :length  length
+          :data    data
+          }))))
