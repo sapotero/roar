@@ -23,36 +23,6 @@
 (defrecord Slave  [rw-strategy name master])
 
 (defrecord InMemoryReadWrite [store])
-;(defrecord OnDiskReadWrite   [store])
-
-; http://cr.yp.to/cdb.html
-;(extend-type OnDiskReadWrite ReadWrite
-;  (write-key!
-;    [this k v]
-;    (-> (:store this)
-;        (swap! conj {(keyword k) v})))
-;  (read-key
-;    [this k]
-;    (-> @(:store this)
-;        ((keyword k))))
-;  (replicate-key!
-;    [this k v]
-;    (-> (:store this)
-;        (swap! conj {(keyword k) v})))
-;  (match-key!
-;    [this pattern]
-;    (-> @(:store this)
-;        ((keyword pattern))
-;        ;(doseq [[key val] :store] (prn key val))
-;        ))
-;  (match-value!
-;    [this pattern]
-;    ()
-;    ;(-> @(:store this)
-;    ;    ((map #( (prn )) seq))
-;    ;    )
-;    )
-;  )
 
 (extend-type InMemoryReadWrite ReadWrite
   (write-key!
@@ -77,8 +47,6 @@
     [this pattern]
     (-> @(:store this)
         ((str pattern)))
-    ;(swap! conj (atom  {:test true}))
-    ;(fn [col] (reduce conj {} col)))
     )
   )
 ;)
@@ -169,31 +137,13 @@
    {:pre [(satisfies? MasterNode master)]}
    (Slave. (InMemoryReadWrite. (atom {})) name (atom master))))
 
-;(defn slave-disk-node
-;  ([name]
-;   (Slave. (OnDiskReadWrite (atom {})) name (atom {})))
-;  ([name master]
-;   {:pre [(satisfies? MasterNode master)]}
-;   (Slave. (OnDiskReadWrite. (atom {})) name (atom master))))
 
 (def master  (roar.core/master-node "master"))
 (def memory1 (roar.core/slave-memory-node "memory1"))
 (def memory2 (roar.core/slave-memory-node "memory2"))
-;(def disk1   (roar.core/slave-disk-node   "disk2"))
 
 (roar.core/add-slave! master memory1)
 (roar.core/add-slave! master memory2)
-;(roar.core/add-slave! master disk1)
-;
-;(roar.core/write! master "key"    "test23")
-;(roar.core/write! master "key1"   "test231")
-;(roar.core/write! memory1 "key11" "test231")
-;(roar.core/write! memory2 "key21" "test231")
-;
-;(= (roar.core/read! memory1 "key") "test23")
-;(= (roar.core/read! memory2 "key") "test23")
-;;(= (roar.core/read! disk1   "key") "test23")
-;(= (roar.core/read! master  "key") "test23")
 
 (defn getLength [command]
   (proto/getLength (str command))
@@ -203,7 +153,7 @@
   [packet]
   (let
     [
-     command (roar.protocol/getCommandType (-> packet :command))
+     command (roar.protocol/get-command-type (-> packet :command))
      key     (-> packet :data :key)
      value   (-> packet :data :value)
      ]
@@ -229,18 +179,21 @@
   (= cmd "`*`*`")
   )
 
+(defn process [cmd]
+  (println
+    (str
+      (execute
+        (roar.protocol/parse-frame
+          (str @buffer cmd))))
+    )
+  (reset! buffer "")
+  )
+
 (defn -main
   []
   (let [ cmd (read-line) ]
     (if (checkCmd cmd)
-      (sync
-        nil
-        (println
-          (str
-            (execute
-              (roar.protocol/parse-frame
-                (str @buffer cmd)))))
-        (reset! buffer ""))
+      (process cmd)
       (swap! buffer str cmd))
     )
   (recur))
