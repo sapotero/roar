@@ -200,33 +200,28 @@
   )
 
 (defn execute
-  [z length]
-  ; проверка на длинну
-  {:pre []}
-
+  [packet]
   (let
     [
-     command (proto/getCommandType (get z 0))
-     data    (proto/getData z length)
+     command (roar.protocol/getCommandType (-> packet :command))
+     key     (-> packet :data :key)
+     value   (-> packet :data :value)
      ]
-    (println command)
+    (println command packet)
     (cond
-      (= command :get) ( read!  master data )
-      (= command :set) ( write! master data data )
-      (= command :match-key)   ( find-in-keys!    master data )
-      (= command :match-value) ( find-in-values!  master data )
+      (= command :get) ( read!  master key )
+      (= command :set) ( write! master key value )
+      (= command :match-key)   ( find-in-keys!    master key )
+      (= command :match-value) ( find-in-values!  master key )
       :else nil
-      ))
-  )
+      )
+)
+)
 
 (defn main
-  [z]
-  {:pre [(and (>= (count z) 3)) ]}
-  (let [ length  (getLength  z) ]
-    (println (str (execute z length)))
-    ;(println (first (roar.protocol/byteToBitString (get x 1))))
-    ;(recur)
-    ))
+  []
+  (execute (roar.protocol/parse-raw-frame (roar.protocol/generate-packet)))
+  )
 
 (defn -main
   []

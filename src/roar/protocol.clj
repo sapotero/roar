@@ -10,15 +10,15 @@
   (map #(clojure.pprint/cl-format nil "~8,'0',B" %)
        byteList))
 
-(defn getCommandType [header]
-  (let [code (.codePointAt (str header) 0)]
-    (cond
-      (= code 001) :set
-      (= code 002) :get
-      (= code 003) :match-key
-      (= code 004) :match-value
-      :else nil
-    )))
+(defn getCommandType [code]
+  (println "command: " code)
+  (cond
+    (= code 1) :set
+    (= code 2) :get
+    (= code 3) :match-key
+    (= code 4) :match-value
+    :else nil
+  ))
 
 (defn- ^BigInteger bytes2int
   [^bytes bytes & {:keys [little-endian]
@@ -221,15 +221,16 @@
      ]
     (sync
       nil
-      (println
-        (conj
-          {}
-          {
-           :id      id
-           :command command
-           :length  length
-           :data    data
-           })))))
+      (println string)
+      (conj
+        {}
+        {
+         :id      id
+         :command command
+         :length  length
+         :data    data
+         })
+      )))
 (defn parse-raw-frame
   [byte-array]
   (let
@@ -240,12 +241,14 @@
      length  (bytes-to-int (subvec package 3 35))
      data    (parse-data   (subvec package 35 (+ 35 length)))
      ]
-    (sync nil (println
+    (sync
+      nil
       (conj
         {}
         {
-          :id      id
-          :command command
-          :length  length
-          :data    data
-          })))))
+         :id      id
+         :command command
+         :length  length
+         :data    data
+         })
+      )))
