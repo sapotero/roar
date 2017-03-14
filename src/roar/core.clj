@@ -207,7 +207,6 @@
      key     (-> packet :data :key)
      value   (-> packet :data :value)
      ]
-    (println command packet)
     (cond
       (= command :get) ( read!  master key )
       (= command :set) ( write! master key value )
@@ -223,8 +222,25 @@
   (execute (roar.protocol/parse-raw-frame (roar.protocol/generate-packet)))
   )
 
+
+(def buffer (atom ""))
+
+(defn checkCmd [cmd]
+  (= cmd "`*`*`")
+  )
+
 (defn -main
   []
   (let [ cmd (read-line) ]
-    (execute (roar.protocol/parse-frame cmd)))
+    (if (checkCmd cmd)
+      (sync
+        nil
+        (println
+          (str
+            (execute
+              (roar.protocol/parse-frame
+                (str @buffer cmd)))))
+        (reset! buffer ""))
+      (swap! buffer str cmd))
+    )
   (recur))

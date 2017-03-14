@@ -11,7 +11,6 @@
        byteList))
 
 (defn getCommandType [code]
-  (println "command: " code)
   (cond
     (= code 1) :set
     (= code 2) :get
@@ -253,14 +252,11 @@
      length  (bytes-to-int (subvec package 3 35))
      data    (parse-data   (subvec package 35 (+ 35 length)))
      ]
-    (sync
-      nil
-      (conj
-        {}
-        {
-         :id      id
-         :command command
-         :length  length
-         :data    data
-         })
-      )))
+    (conj
+      {}
+      {
+       :id      id
+       :command command
+       :length  length
+       :data    data
+       })))
