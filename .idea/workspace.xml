@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9e13a0a5-9ba5-400b-87d4-c95f5cfdb204" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/replstate.xml" afterPath="$PROJECT_DIR$/.idea/replstate.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/roar/core.clj" afterPath="$PROJECT_DIR$/src/roar/core.clj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/roar/protocol.clj" afterPath="$PROJECT_DIR$/src/roar/protocol.clj" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,23 +19,24 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="core.clj" pinned="false" current-in-tab="true">
+      <file leaf-file-name="core.clj" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/roar/core.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="715">
-              <caret line="225" column="11" lean-forward="true" selection-start-line="225" selection-start-column="11" selection-end-line="225" selection-end-column="11" />
+            <state relative-caret-position="3375">
+              <caret line="225" column="11" lean-forward="false" selection-start-line="225" selection-start-column="11" selection-end-line="225" selection-end-column="11" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="protocol.clj" pinned="false" current-in-tab="false">
+      <file leaf-file-name="protocol.clj" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/roar/protocol.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="146">
-              <caret line="213" column="26" lean-forward="false" selection-start-line="213" selection-start-column="26" selection-end-line="213" selection-end-column="26" />
+            <state relative-caret-position="240">
+              <caret line="106" column="26" lean-forward="true" selection-start-line="106" selection-start-column="26" selection-end-line="106" selection-end-column="26" />
               <folding>
                 <element signature="e#1041#1446#0" expanded="false" />
+                <element signature="e#2528#3810#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -84,8 +86,8 @@
         <option value="$PROJECT_DIR$/test/roar/core_test.clj" />
         <option value="$PROJECT_DIR$/src/roar/command.clj" />
         <option value="$PROJECT_DIR$/project.clj" />
-        <option value="$PROJECT_DIR$/src/roar/protocol.clj" />
         <option value="$PROJECT_DIR$/src/roar/core.clj" />
+        <option value="$PROJECT_DIR$/src/roar/protocol.clj" />
       </list>
     </option>
   </component>
@@ -94,9 +96,8 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="1918" />
-    <option name="y" value="-3" />
-    <option name="width" value="1924" />
-    <option name="height" value="1052" />
+    <option name="width" value="1920" />
+    <option name="height" value="1045" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -116,7 +117,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -167,8 +170,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -180,7 +181,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
-  <component name="ReplState" timestamp="1489494269375">{:repl-history {:ide [], :local [&quot;(roar.core/match-value! roar.core/master \&quot;key\&quot;)&quot; &quot;(roar.core/match-value! roar.core/slave1 \&quot;key\&quot;)&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;key\&quot;)&quot; &quot;(def ss (agent 1))&quot; &quot;(send inc ss)&quot; &quot;(send ss inc)&quot; &quot;@ss&quot; &quot;(def atom (atom {}))&quot; &quot;(def atoms (atom {}))&quot; &quot;(def a (atom {}))&quot; &quot;(let [re (fn [coll] (reduce (fn [val acc] (prn val )) coll ))]\n  (swap! a re  )\n  )&quot; &quot;(def te (atom 1))&quot; &quot;(swap! te inc)&quot; &quot;@te&quot; &quot;(swap! (fn [x] (assoc x \&quot;a\&quot; 1)) te)&quot; &quot;(defn qq [x] (assoc x \&quot;a\&quot; 1))&quot; &quot;(qq {})&quot; &quot;(swap! qq te)&quot; &quot;(swap! te qq)&quot; &quot;(-&gt; qq te)&quot; &quot;(-&gt; qq .te)&quot; &quot;(-&gt; te .qq)&quot; &quot;(-&gt; te qq)&quot; &quot;(-&gt; te )&quot; &quot;(swap! te assoc :a 1)&quot; &quot;te&quot; &quot;(swap! a assoc :a 1)&quot; &quot;(swap! a qq)&quot; &quot;(swap! a (fn [x] (assoc x \&quot;a\&quot; 1)))&quot; &quot;(swap! a (fn [col] (reduce (fn [val acc] (prn val) ) col)))&quot; &quot;(roar.core/find-in-values! roar.core/memory1 \&quot;key\&quot; )&quot; &quot;(roar.core/read! roar.core/master \&quot;key\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;key\&quot; )&quot; &quot;((fn [col] (reduce conj {} col) {:a 1})&quot; &quot;((fn [col] (reduce conj {} col) {:a 1}))&quot; &quot;(reduce conj {} {:a 1})&quot; &quot;(reduce conj {.c 2} {:a 1})&quot; &quot;(reduce conj {:c 2} {:a 1})&quot; &quot;a&quot; &quot;@a&quot; &quot;(def at (atom {}))&quot; &quot;(def at (atom {:a 1}))&quot; &quot;(swap! at (fn [col] (reduce conj {} col)))&quot; &quot;(def at (atom {:store (atom {})}))&quot; &quot;(-&gt; @(:store at))&quot; &quot;(-&gt; (:store at))&quot; &quot;@@at&quot; &quot;at&quot; &quot;@at&quot; &quot;(:store @at)&quot; &quot;(-&gt; at :store)&quot; &quot;(-&gt; @at :store)&quot; &quot;(-&gt; (:store @at) (swap! conj))&quot; &quot;(-&gt; (:store @at) (swap! conj {}))&quot; &quot;(-&gt; (:store @at) (swap! conj {:a 1}))&quot; &quot;(-&gt; (:store @at) (swap! conj {:a 11}))&quot; &quot;@(:store @at)&quot; &quot;(-&gt; (:store @at) (swap! conj {:aa 11}))&quot; &quot;(-&gt; (:store @at) (swap! conj {:aba 11}))&quot; &quot;(str #\&quot;\&quot; \&quot;pattern\&quot;)&quot; &quot;#\&quot;patter\&quot;&quot; &quot;\n(= (roar.core/read! memory1 \&quot;key\&quot;) \&quot;test23\&quot;)&quot; &quot;(roar.core/master)&quot; &quot;(roar.core/memory1)&quot; &quot;(roar.core/memory2)&quot; &quot;(= (roar.core/read! roar.core/memory1 \&quot;key\&quot;) \&quot;test23\&quot;)&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;test23\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;.+\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;.*\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;\\w+\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;\\w+\\r\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;\\w+\\r\\n\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;test\&quot; )&quot; &quot;(atom {})&quot; &quot;(conj nil \&quot;asd\&quot;)&quot; &quot;(roar.core/-main)&quot; &quot;send&quot; &quot;s&quot; &quot;ss&quot; &quot;(roar.protocol/test-buffer)&quot; &quot;(roar.protocol/test-buffer\n  )&quot; &quot;(roar.protocol/test-buffer \&quot;test\&quot;)&quot; &quot;(roar.protocol/test-command \&quot;test\&quot;)&quot; &quot;(roar.protocol/test-command \&quot;ssst\&quot;)&quot; &quot;(roar.protocol/test-command \&quot;sest\&quot;)&quot; &quot;(roar.protocol/test-command \&quot;asdasdasdasdasdasdasdasdaad\&quot;)&quot; &quot;(byte 0xff)&quot; &quot;(byte -129)&quot; &quot;0xff&quot; &quot;(roar.protocol/test-command \&quot;asdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaad\&quot;)&quot; &quot;(roar.protocol/test-command \&quot;0001sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaad\&quot;)&quot; &quot;(roar.protocol/test-command \&quot;0000sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaad\&quot;)&quot; &quot;(roar.protocol/test-command \&quot;ss00sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaad\&quot;)&quot; &quot;(roar.protocol/parse-frame \&quot;ss00sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaad\&quot;)&quot; &quot;(roar.protocol/parse-frame \&quot;sss0sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaad\&quot;)&quot; &quot;\n(for [x (range 3 7)] (roar.protocol/parse-frame \&quot;sss0sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadsss1111sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaad\&quot;))\n&quot; &quot;(roar.protocol/parse-frame \&quot;sss0sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadsss0sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaad\&quot;)&quot; &quot;111&quot; &quot;(roar.protocol/parse-frame \&quot;sss0sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadsss1111sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaad\&quot;)&quot; &quot;\n(for [x (range 3 70000)] (roar.protocol/parse-frame \&quot;sss0sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadsss1111sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaad\&quot;))\n&quot; &quot;\n(for [x (range 3 11)] (roar.protocol/parse-frame \&quot;sss0sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadsss1111sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaad\&quot;))\n&quot;], :remote []}}</component>
+  <component name="ReplState" timestamp="1489495290378">{:repl-history {:ide [], :local [&quot;(roar.core/match-value! roar.core/master \&quot;key\&quot;)&quot; &quot;(roar.core/match-value! roar.core/slave1 \&quot;key\&quot;)&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;key\&quot;)&quot; &quot;(def ss (agent 1))&quot; &quot;(send inc ss)&quot; &quot;(send ss inc)&quot; &quot;@ss&quot; &quot;(def atom (atom {}))&quot; &quot;(def atoms (atom {}))&quot; &quot;(def a (atom {}))&quot; &quot;(let [re (fn [coll] (reduce (fn [val acc] (prn val )) coll ))]\n  (swap! a re  )\n  )&quot; &quot;(def te (atom 1))&quot; &quot;(swap! te inc)&quot; &quot;@te&quot; &quot;(swap! (fn [x] (assoc x \&quot;a\&quot; 1)) te)&quot; &quot;(defn qq [x] (assoc x \&quot;a\&quot; 1))&quot; &quot;(qq {})&quot; &quot;(swap! qq te)&quot; &quot;(swap! te qq)&quot; &quot;(-&gt; qq te)&quot; &quot;(-&gt; qq .te)&quot; &quot;(-&gt; te .qq)&quot; &quot;(-&gt; te qq)&quot; &quot;(-&gt; te )&quot; &quot;(swap! te assoc :a 1)&quot; &quot;te&quot; &quot;(swap! a assoc :a 1)&quot; &quot;(swap! a qq)&quot; &quot;(swap! a (fn [x] (assoc x \&quot;a\&quot; 1)))&quot; &quot;(swap! a (fn [col] (reduce (fn [val acc] (prn val) ) col)))&quot; &quot;(roar.core/find-in-values! roar.core/memory1 \&quot;key\&quot; )&quot; &quot;(roar.core/read! roar.core/master \&quot;key\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;key\&quot; )&quot; &quot;((fn [col] (reduce conj {} col) {:a 1})&quot; &quot;((fn [col] (reduce conj {} col) {:a 1}))&quot; &quot;(reduce conj {} {:a 1})&quot; &quot;(reduce conj {.c 2} {:a 1})&quot; &quot;(reduce conj {:c 2} {:a 1})&quot; &quot;a&quot; &quot;@a&quot; &quot;(def at (atom {}))&quot; &quot;(def at (atom {:a 1}))&quot; &quot;(swap! at (fn [col] (reduce conj {} col)))&quot; &quot;(def at (atom {:store (atom {})}))&quot; &quot;(-&gt; @(:store at))&quot; &quot;(-&gt; (:store at))&quot; &quot;@@at&quot; &quot;at&quot; &quot;@at&quot; &quot;(:store @at)&quot; &quot;(-&gt; at :store)&quot; &quot;(-&gt; @at :store)&quot; &quot;(-&gt; (:store @at) (swap! conj))&quot; &quot;(-&gt; (:store @at) (swap! conj {}))&quot; &quot;(-&gt; (:store @at) (swap! conj {:a 1}))&quot; &quot;(-&gt; (:store @at) (swap! conj {:a 11}))&quot; &quot;@(:store @at)&quot; &quot;(-&gt; (:store @at) (swap! conj {:aa 11}))&quot; &quot;(-&gt; (:store @at) (swap! conj {:aba 11}))&quot; &quot;(str #\&quot;\&quot; \&quot;pattern\&quot;)&quot; &quot;#\&quot;patter\&quot;&quot; &quot;\n(= (roar.core/read! memory1 \&quot;key\&quot;) \&quot;test23\&quot;)&quot; &quot;(roar.core/master)&quot; &quot;(roar.core/memory1)&quot; &quot;(roar.core/memory2)&quot; &quot;(= (roar.core/read! roar.core/memory1 \&quot;key\&quot;) \&quot;test23\&quot;)&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;test23\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;.+\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;.*\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;\\w+\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;\\w+\\r\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;\\w+\\r\\n\&quot; )&quot; &quot;(roar.core/find-in-values! roar.core/master \&quot;test\&quot; )&quot; &quot;(atom {})&quot; &quot;(conj nil \&quot;asd\&quot;)&quot; &quot;(roar.core/-main)&quot; &quot;send&quot; &quot;s&quot; &quot;ss&quot; &quot;(roar.protocol/test-buffer)&quot; &quot;(roar.protocol/test-buffer\n  )&quot; &quot;(roar.protocol/test-buffer \&quot;test\&quot;)&quot; &quot;(roar.protocol/test-command \&quot;test\&quot;)&quot; &quot;(roar.protocol/test-command \&quot;ssst\&quot;)&quot; &quot;(roar.protocol/test-command \&quot;sest\&quot;)&quot; &quot;(roar.protocol/test-command \&quot;asdasdasdasdasdasdasdasdaad\&quot;)&quot; &quot;(byte 0xff)&quot; &quot;(byte -129)&quot; &quot;0xff&quot; &quot;(roar.protocol/test-command \&quot;asdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaad\&quot;)&quot; &quot;(roar.protocol/test-command \&quot;0001sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaad\&quot;)&quot; &quot;(roar.protocol/test-command \&quot;0000sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaad\&quot;)&quot; &quot;(roar.protocol/test-command \&quot;ss00sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaad\&quot;)&quot; &quot;(roar.protocol/parse-frame \&quot;ss00sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaad\&quot;)&quot; &quot;(roar.protocol/parse-frame \&quot;sss0sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaad\&quot;)&quot; &quot;\n(for [x (range 3 7)] (roar.protocol/parse-frame \&quot;sss0sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadsss1111sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaad\&quot;))\n&quot; &quot;(roar.protocol/parse-frame \&quot;sss0sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadsss0sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaad\&quot;)&quot; &quot;111&quot; &quot;(roar.protocol/parse-frame \&quot;sss0sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadsss1111sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaad\&quot;)&quot; &quot;\n(for [x (range 3 70000)] (roar.protocol/parse-frame \&quot;sss0sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadsss1111sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaad\&quot;))\n&quot; &quot;\n(for [x (range 3 11)] (roar.protocol/parse-frame \&quot;sss0sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadsss1111sdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaadasdasdasdasdasdasdasdasdaad\&quot;))\n&quot;], :remote []}}</component>
   <component name="RunManager" selected="Clojure REPL.repl">
     <configuration default="false" name="node" type="ClojureScriptRunConfiguration" factoryName="Clojure Script" temporary="true">
       <module name="roar" />
@@ -457,19 +458,18 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1918" y="-3" width="1924" height="1052" extended-state="6" />
+    <frame x="1918" y="0" width="1920" height="1045" extended-state="4" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959402" sideWeight="0.49555555" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="REPL" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41320553" sideWeight="0.6485623" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="REPL" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28922093" sideWeight="0.6485623" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30444443" sideWeight="0.48939395" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Leiningen" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43856838" sideWeight="0.3514377" order="4" side_tool="false" content_ui="tabs" />
@@ -477,7 +477,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19116081" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19316968" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -488,6 +488,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -511,6 +512,25 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/roar/core.clj">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3375">
+          <caret line="225" column="11" lean-forward="true" selection-start-line="225" selection-start-column="11" selection-end-line="225" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/roar/protocol.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#1041#1446#0" expanded="false" />
+            <element signature="e#2528#3810#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/roar/core.clj">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
@@ -523,6 +543,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#1041#1446#0" expanded="false" />
+            <element signature="e#2528#3810#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -541,6 +562,7 @@
           <caret line="21" column="7" lean-forward="true" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
           <folding>
             <element signature="e#1041#1446#0" expanded="false" />
+            <element signature="e#2528#3810#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -549,7 +571,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -638,7 +659,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -661,7 +681,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="293">
           <caret line="210" column="23" lean-forward="false" selection-start-line="210" selection-start-column="23" selection-end-line="210" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -669,25 +688,25 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="293">
           <caret line="2504" column="6" lean-forward="false" selection-start-line="2504" selection-start-column="6" selection-end-line="2504" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/roar/core.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3375">
+          <caret line="225" column="11" lean-forward="false" selection-start-line="225" selection-start-column="11" selection-end-line="225" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/roar/protocol.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="213" column="26" lean-forward="false" selection-start-line="213" selection-start-column="26" selection-end-line="213" selection-end-column="26" />
+        <state relative-caret-position="240">
+          <caret line="106" column="26" lean-forward="true" selection-start-line="106" selection-start-column="26" selection-end-line="106" selection-end-column="26" />
           <folding>
             <element signature="e#1041#1446#0" expanded="false" />
+            <element signature="e#2528#3810#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/roar/core.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="715">
-          <caret line="225" column="11" lean-forward="true" selection-start-line="225" selection-start-column="11" selection-end-line="225" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>

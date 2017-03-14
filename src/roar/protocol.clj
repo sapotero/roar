@@ -99,9 +99,9 @@
      package      (test-buffer string)
      type         (bytes-to-int (subvec package 0 1))
      key-length   (bytes-to-int (subvec package 1 17))
-     key          (String. (byte-array (subvec package 17 (+ 17 key-length))))
-     value-length (bytes-to-int (subvec package (+ key-length 17) (+ key-length 17 16)))
-     value        (String. (byte-array (subvec package (+ key-length 17 16) (+ key-length value-length 17 16))))
+     key          (String. (byte-array (subvec package 17 (+ 3 key-length))))
+     value-length (bytes-to-int (subvec package (+ key-length 3) (+ key-length 3 16)))
+     value        (String. (byte-array (subvec package (+ key-length 3 16) (+ key-length value-length 3 16))))
      ]
     (conj {} {
         :type         type
