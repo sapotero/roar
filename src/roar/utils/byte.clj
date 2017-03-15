@@ -7,50 +7,19 @@
     (apply (partial str "0x"))
     read-string))
 
-(defn as-tuple [data]
-  (let
-    [
-     key-length   (- (bytes-to-int (subvec data 0 16)) 14)
-     value-length (- (bytes-to-int (subvec data (+ key-length  16) (+ key-length  32))) 14)
-     size (- (count data) (+ key-length value-length 32) )
-     ]
-    (conj
-      {
-       :key   (String. (byte-array  (subvec data 16 (+ 16 key-length  ))))
-       :value (String. (byte-array  (subvec data (+ key-length  32) (+ key-length  value-length 32))))
-       :size size
-       })
-    )
-  )
+(defn take-key-val-length [packet]
+  (let [keylen (- (bytes-to-int (->> packet (take 16))) 14)
+        tail (->> packet (drop keylen))] [keylen tail]))
 
+(defn take-key-val [[keylen packet]]
+  {:key (String. (byte-array  (->> packet (take keylen)))) :tail (->> packet (drop keylen))})
 
-(defn as-array-tuple [data]
-  (let
-    [
-     key-length   (- (bytes-to-int (subvec data 0 16)) 14)
-     value-length (- (bytes-to-int (subvec data (+ key-length  16) (+ key-length  32))) 14)
-     size (- data (+ key-length value-length 32))
-     ]
-    (conj
-      {
-       :key   (String. (byte-array  (subvec data 16 (+ 16 key-length  ))))
-       :value (String. (byte-array  (subvec data (+ key-length  32) (+ key-length  value-length 32))))
-       :size   size
-       })
-    )
-  )
-
-(def array (atom []))
+(defn recursive-parse
+  ([conResult & packet]
+    (let [result (take-key-val (take-key-val-length packet))]
+      (apply recursive-parse (conj conResult (:key result)) (:tail result))))
+  ([conResult]
+    (apply hash-map conResult)))
 
 (defn as-array [data]
-  (let
-    [item (as-array-tuple data)]
-    (if (= (- data (count item )) 0)
-      (sync
-        nil
-        (conj array item)
-        (reset! atom "")
-        )
-      (swap! array conj item))
-    (recur (subvec data (item :size) (count data) ))
-    ))
+  (apply recursive-parse [] data))

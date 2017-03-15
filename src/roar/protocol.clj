@@ -26,12 +26,7 @@
 
 (defn parse-packet-data
   [data type]
-  (case type
-    :tuple (byte/as-tuple data)
-    :array (byte/as-array data)
-    nil
-    )
-  )
+  (byte/as-array data))
 
 (defn parse-data
   [string]

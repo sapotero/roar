@@ -66,14 +66,14 @@
         (read-key (keyword k))))
   (find-in-values!
     [this pattern]
-    (sync nil (set (filter
-                     (fn [key]
-                       (re-matches
-                         (re-pattern pattern)
-                         (name key)
-                         ))
-                     (map (fn [[k v]] v ) @(-> this :rw-strategy :store))
-                     ))))
+    (set (filter
+           (fn [key]
+             (re-matches
+               (re-pattern pattern)
+               (name key)
+               ))
+           (map (fn [[k v]] v ) @(-> this :rw-strategy :store))
+           )))
   (find-in-keys!
     [this pattern]
     (sync nil (set (filter
@@ -145,10 +145,6 @@
 (roar.core/add-slave! master memory1)
 (roar.core/add-slave! master memory2)
 
-(defn getLength [command]
-  (proto/getLength (str command))
-  )
-
 (defn execute
   [packet]
   (let
@@ -166,12 +162,6 @@
       )
 )
 )
-
-(defn main
-  []
-  (execute (roar.protocol/parse-raw-frame (roar.protocol/generate-packet)))
-  )
-
 
 (def buffer (atom ""))
 
