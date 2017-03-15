@@ -8,9 +8,8 @@
     read-string))
 
 (defn take-key-val-length [packet]
-  (println packet)
-  (let [keylen (- (->> packet (take 16) bytes-to-int) 14)
-        tail (->> packet (drop keylen))] (println keylen) [keylen tail]))
+  (let [keylen (->> packet (take 16) bytes-to-int)
+        tail (->> packet (drop 16))] [keylen tail]))
 
 (defn take-key-val [[keylen packet]]
   {:key (->> packet (take keylen) byte-array String.) :tail (->> packet (drop keylen))})
@@ -23,6 +22,7 @@
     conResult))
 
 (defn as-array [data]
+  (println data)
   (map
     #(hash-map :key (first %) :val (last %))
     (partition 2 (apply recursive-parse [] data))))

@@ -3,8 +3,7 @@
 
 (defn get-command-type [code]
   (cond
-    (= code 10) :set-tuple
-    (= code 11) :set-array
+    (= code 40) :set
     (= code 20) :get
     (= code 31) :match-key
     (= code 32) :match-value
@@ -42,21 +41,23 @@
 
 (defn parse-frame
   [string]
-  {:pre (>= (count string) 40)}
+  {:pre (>= (count string) 15)}
   (let
     [
      package (to-vec string)
      id      (byte/bytes-to-int (subvec package 0 2))
      command (byte/bytes-to-int (subvec package 2 3))
      length  (byte/bytes-to-int (subvec package 3 35))
-     data    (parse-data (subvec package 35 (+ 35 length)))
      ]
+    (println id)
+    (println command)
+    (println length)
     (conj
       {
        :id      id
        :command command
        :length  length
-       :data    data
+       :data     (parse-data (subvec package 35 (+ 35 length)))
        })
     ))
 ;)

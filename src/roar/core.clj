@@ -2,8 +2,8 @@
 (require '[roar.protocol :as proto])
 
 (defprotocol Node
-  (write!       [this k v])
-  (read!        [this k])
+  (write!       [this data])
+  (read!        [this data])
   (find-in-keys!   [this pattern])
   (find-in-values! [this pattern])
   )
@@ -12,9 +12,9 @@
   (add-slave! [this slave]))
 
 (defprotocol ReadWrite
-  (write-key!     [this k v])
-  (read-key       [this k])
-  (replicate-key! [this k v])
+  (write-key!     [this data])
+  (read-key       [this data])
+  (replicate-key! [this data])
   (match-key!     [this pattern])
   (match-value!   [this pattern])
   )
@@ -26,17 +26,17 @@
 
 (extend-type InMemoryReadWrite ReadWrite
   (write-key!
-    [this k v]
-    (-> (:store this)
-        (swap! conj {(keyword k) v})))
+    [this array]
+    (doall
+      (map (fn [x] (swap! (:store this) conj {(keyword (:key x)) (x :val)})) array)))
   (read-key
-    [this k]
-    (-> @(:store this)
-        ((keyword k))))
+    [this keys]
+    (-> (select-keys @(:store this) (vec keys))))
   (replicate-key!
-    [this k v]
-    (-> (:store this)
-        (swap! conj {(keyword k) v})))
+    [this array]
+    (println (str "array: " array))
+    (doall
+      (map (fn [x] (swap! (:store this) conj {(keyword (:key x)) (x :val)})) array)))
   (match-key!
     [this pattern]
     (-> @(:store this)
@@ -53,17 +53,17 @@
 
 (extend-type Master Node
   (write!
-    [this k v]
+    [this data]
     (-> (:rw-strategy this)
-        (write-key! k v))
-    (let [slaves @(:slaves this)]
-      (doseq [{:keys [rw-strategy]} slaves]
-        (replicate-key! rw-strategy k v)))
+        (write-key! data))
+    ;(let [slaves @(:slaves this)]
+    ;  (doseq [{:keys [rw-strategy]} slaves]
+    ;    (replicate-key! rw-strategy data)))
     this)
   (read!
-    [this k]
-    (-> (:rw-strategy this)
-        (read-key (keyword k))))
+    [this keys]
+    (println keys)
+    (read-key (:rw-strategy this) (map keyword keys)))
   (find-in-values!
     [this pattern]
     (set (filter
@@ -98,16 +98,16 @@
         :master
         (reset! this))
     (let [store @(:store (:rw-strategy this))]
-      (doseq [[k v] store]
-        (replicate-key! (:rw-strategy slave) (name k) v)))
+      (doseq [[data] store]
+        (replicate-key! (:rw-strategy slave) data)))
     this))
 
 (extend-type Slave Node
   (write!
-    [this k v]
+    [this data]
     (-> @(:master this)
         (:rw-strategy)
-        (write-key! k v)))
+        (write-key! data)))
   (read!
     [this k]
     (-> (:rw-strategy this)
@@ -138,24 +138,25 @@
    (Slave. (InMemoryReadWrite. (atom {})) name (atom master))))
 
 
-(def master  (roar.core/master-node "master"))
-(def memory1 (roar.core/slave-memory-node "memory1"))
-(def memory2 (roar.core/slave-memory-node "memory2"))
-
-(roar.core/add-slave! master memory1)
-(roar.core/add-slave! master memory2)
+(def master  (master-node "master"))
+(write! master '({:key "some", :val "other"}))
+(println (read! master '(:some)))
+;(def memory1 (slave-memory-node "memory1"))
+;(def memory2 (roar.core/slave-memory-node "memory2"))
+;
+;(add-slave! master memory1)
 
 (defn execute
   [packet]
+  (println packet)
   (let
     [
      command (roar.protocol/get-command-type (-> packet :command))
-     key     (-> packet :data :key)
      value   (-> packet :data :value)
      ]
     (cond
-      (= command :get) ( read!  master key )
-      (= command :set) ( write! master key value )
+      (= command :get) (->> packet :data :data (map :key) (read! master))
+      (= command :set) (write! master (get-in packet [:data :data]) )
       (= command :match-key)   ( find-in-keys!    master key )
       (= command :match-value) ( find-in-values!  master key )
       :else nil
