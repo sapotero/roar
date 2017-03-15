@@ -19,7 +19,9 @@
     (let [result (take-key-val (take-key-val-length packet))]
       (apply recursive-parse (conj conResult (:key result)) (:tail result))))
   ([conResult]
-    (apply hash-map conResult)))
+    conResult))
 
 (defn as-array [data]
-  (apply recursive-parse [] data))
+  (map
+    #(hash-map :key (first %) :val (last %))
+    (partition 2 (apply recursive-parse [] data))))
