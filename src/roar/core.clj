@@ -23,12 +23,13 @@
 (defrecord Slave  [rw-strategy name master])
 
 (defrecord InMemoryReadWrite [store])
+(def memory-store (ref {}))
 
 (extend-type InMemoryReadWrite ReadWrite
   (write-key!
-    [this array]
-    (doall
-      (map (fn [x] (swap! (:store this) conj {(keyword (:key x)) (x :val)})) array)))
+    [this data]
+   `(alter memory-store conj {(keyword (:key ~data)) (:val ~data)})
+    )
   (read-key
     [this keys]
     (-> (select-keys @(:store this) (vec keys))))
@@ -41,7 +42,6 @@
     [this pattern]
     (-> @(:store this)
         ((keyword pattern))
-        ;(doseq [[key val] :store] (prn key val))
         ))
   (match-value!
     [this pattern]
@@ -51,15 +51,17 @@
   )
 ;)
 
+
 (extend-type Master Node
   (write!
     [this data]
-    (-> (:rw-strategy this)
-        (write-key! data))
-    ;(let [slaves @(:slaves this)]
-    ;  (doseq [{:keys [rw-strategy]} slaves]
-    ;    (replicate-key! rw-strategy data)))
-    this)
+    (eval
+      (conj
+        (map
+          (fn [x] (write-key! (:rw-strategy this) x))
+          data)
+        `dosync)))
+
   (read!
     [this keys]
     (println keys)
@@ -125,26 +127,24 @@
 
   )
 
+
 (defn master-node
   [name]
-  (Master. (InMemoryReadWrite.  (atom {})) name (atom [])))
+  (Master. (InMemoryReadWrite. memory-store) name (atom [])))
 
 
 (defn slave-memory-node
   ([name]
-   (Slave. (InMemoryReadWrite. (atom {})) name (atom {})))
+   (Slave. (InMemoryReadWrite. memory-store) name (atom {})))
   ([name master]
    {:pre [(satisfies? MasterNode master)]}
-   (Slave. (InMemoryReadWrite. (atom {})) name (atom master))))
+   (Slave. (InMemoryReadWrite. memory-store) name (atom master))))
 
 
 (def master  (master-node "master"))
-(write! master '({:key "some", :val "other"}))
-(println (read! master '(:some)))
-;(def memory1 (slave-memory-node "memory1"))
-;(def memory2 (roar.core/slave-memory-node "memory2"))
-;
-;(add-slave! master memory1)
+(def memory1 (slave-memory-node "memory1"))
+(add-slave! master memory1)
+
 
 (defn execute
   [packet]
