@@ -1,6 +1,7 @@
 (ns roar.protocol (:import (java.nio ByteBuffer ByteOrder)))
 (require '[roar.utils.byte :as byte])
 
+
 (defn get-command-type [code]
   (cond
     (= code 40) :set
@@ -40,11 +41,12 @@
        })))
 
 (defn parse-frame
-  [string]
-  {:pre (>= (count string) 15)}
+  [data]
+  {:pre (>= (count data) 15)}
+  (println data)
   (let
     [
-     package (to-vec string)
+     package (to-vec data)
      id      (byte/bytes-to-int (subvec package 0 2))
      command (byte/bytes-to-int (subvec package 2 3))
      length  (byte/bytes-to-int (subvec package 3 35))
@@ -60,4 +62,3 @@
        :data     (parse-data (subvec package 35 (+ 35 length)))
        })
     ))
-;)

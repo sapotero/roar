@@ -1,5 +1,13 @@
-(ns roar.core  (:gen-class) )
-(require '[roar.protocol :as proto])
+(ns roar.core)
+
+(require '[roar.protocol :as proto]
+         '[aleph.tcp :as tcp]
+         '[manifold.stream :as stream]
+         '[manifold.bus :as bus]
+         )
+
+
+
 
 (defprotocol Node
   (write!       [this data])
@@ -15,8 +23,6 @@
   (write-key!     [this data])
   (read-key       [this data])
   (replicate-key! [this data])
-  (match-key!     [this pattern])
-  (match-value!   [this pattern])
   )
 
 (defrecord Master [rw-strategy name slaves])
@@ -34,19 +40,8 @@
     [this keys]
     (-> (select-keys @(:store this) (vec keys))))
   (replicate-key!
-    [this array]
-    (println (str "array: " array))
-    (doall
-      (map (fn [x] (swap! (:store this) conj {(keyword (:key x)) (x :val)})) array)))
-  (match-key!
-    [this pattern]
-    (-> @(:store this)
-        ((keyword pattern))
-        ))
-  (match-value!
-    [this pattern]
-    (-> @(:store this)
-        ((str pattern)))
+    [this data]
+    `(alter memory-store conj {(keyword (:key ~data)) (:val ~data)})
     )
   )
 ;)
@@ -66,26 +61,33 @@
     [this keys]
     (println keys)
     (read-key (:rw-strategy this) (map keyword keys)))
-  (find-in-values!
-    [this pattern]
-    (set (filter
-           (fn [key]
-             (re-matches
-               (re-pattern pattern)
-               (name key)
-               ))
-           (map (fn [[k v]] v ) @(-> this :rw-strategy :store))
-           )))
+
   (find-in-keys!
     [this pattern]
-    (sync nil (set (filter
-                     (fn [key]
-                       (re-matches
-                         (re-pattern pattern)
-                         (name key)
-                         ))
-                     (keys @(-> this :rw-strategy :store) )
-                     )))))
+    (println pattern)
+    (select-keys
+      @memory-store
+      (filter
+        (fn [key]
+          (re-matches
+            (re-pattern pattern)
+            (name key)
+            ))
+        (keys @memory-store)
+        )))
+
+  (find-in-values!
+    [this pattern]
+    (map
+      (fn [key]
+        (println pattern)
+        (re-matches
+          (re-pattern (str pattern))
+          (str (get key 0) @memory-store)
+          )
+        )
+      @memory-store
+      )))
 
 
 (extend-type Master MasterNode
@@ -99,9 +101,9 @@
     (-> slave
         :master
         (reset! this))
-    (let [store @(:store (:rw-strategy this))]
-      (doseq [[data] store]
-        (replicate-key! (:rw-strategy slave) data)))
+    ;(let [store @(:store (:rw-strategy this))]
+    ;  (doseq [[data] store]
+    ;    (replicate-key! (:rw-strategy slave) data)))
     this))
 
 (extend-type Slave Node
@@ -117,13 +119,15 @@
 
   (find-in-keys!
     [this pattern]
-    (-> (:rw-strategy this)
-        (match-key! (keyword pattern))))
+    ;(-> (:rw-strategy this)
+    ;    (match-key! (keyword pattern)))
+    )
   (find-in-values!
     [this pattern]
-    (let [slaves @(:slaves this)]
-      (doseq [{:keys [rw-strategy]} slaves]
-        (match-value! rw-strategy pattern))))
+    ;(let [slaves @(:slaves this)]
+    ;  (doseq [{:keys [rw-strategy]} slaves]
+    ;    (match-value! rw-strategy pattern)))
+    )
 
   )
 
@@ -142,8 +146,8 @@
 
 
 (def master  (master-node "master"))
-(def memory1 (slave-memory-node "memory1"))
-(add-slave! master memory1)
+;(def memory1 (slave-memory-node "memory1"))
+;(add-slave! master memory1)
 
 
 (defn execute
@@ -164,27 +168,30 @@
 )
 )
 
-(def buffer (atom ""))
-
-(defn checkCmd [cmd]
-  (= cmd "`*`*`")
-  )
-
 (defn process [cmd]
   (println
     (str
       (execute
-        (roar.protocol/parse-frame
-          (str @buffer cmd))))
-    )
-  (reset! buffer "")
+        (roar.protocol/parse-frame cmd)))
+    ))
+
+
+(def bus (bus/event-bus))
+
+(defn handle-msg [byte-msg stream]
+  (println byte-msg)
+  (process byte-msg)
   )
+
+(defn bus-handler [s info]
+  (do
+    (stream/connect (bus/subscribe bus "msg") s)
+    (stream/consume #(bus/publish! bus "msg" (handle-msg % s)) s)))
+
+(defn start-server
+  []
+  (tcp/start-server bus-handler {:port 8888}))
 
 (defn -main
   []
-  (let [ cmd (read-line) ]
-    (if (checkCmd cmd)
-      (process cmd)
-      (swap! buffer str cmd))
-    )
-  (recur))
+  (start-server))
