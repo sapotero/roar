@@ -20,11 +20,11 @@
 
 (defn to-int-seq
   [string]
-  (vec (map #(int %) string)))
+  (map #(byte (int %)) string))
 
 (defn to-seq
   [string]
-  (map #(cond (> 0 %) (bit-and % 0xFF) true (int %)) string))
+  (map #(bit-and (int %) 0xFF) string))
 
 (defn to-vec
   [string]
@@ -47,14 +47,15 @@
 
 (defn parse
   ([result data c & d]
-   (let [val (take data d)]) (apply parse (conj result val) (drop d data) d))
-  ([result data c] (conj result (byte/bytes-to-int (take c data)) (drop c data))))
+   (let [val (take c data)] (apply parse (conj result val) (drop c data) d)))
+  ([result data c]
+   (conj result (take c data) (drop c data))))
 
 (defn parse-frame [data]
-  (let [raw-result (parse [] (to-int-seq data) '(2 1 32))]
+  (let [raw-result (apply parse [] (to-seq data) '(2 1 32))]
     {
-     :id (subvec raw-result 0)
-     :command (subvec raw-result 1)
-     :length (subvec raw-result 2)
-     :data (parse-data (subvec raw-result 3))
+     :id (String. (byte-array (nth raw-result 0)))
+     :command (roar.utils.byte/bytes-to-int (nth raw-result 1))
+     :length (roar.utils.byte/bytes-to-int (nth raw-result 2))
+     :data (parse-data (nth raw-result 3))
      }))

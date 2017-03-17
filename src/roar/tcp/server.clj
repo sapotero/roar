@@ -6,19 +6,21 @@
 
 (defn receive
   [socket]
-  (slurp (io/reader socket)))
+  (.readLine (io/reader socket)))
 
 (defn raw-handler
-  [data ]
-  (roar.protocol/parse-frame data))
+  [data]
+  (println (roar.protocol/parse-frame (str data)))
+  (roar.protocol/parse-frame (str data)))
 
 (defn start-server [port handler]
-  (with-open [server-sock (ServerSocket. port)]
-    (while @running
-      (with-open [sock (.accept server-sock)]
-        (let [msg-in  (receive sock)
-              msg-out (handler msg-in)]
-          (send sock msg-out))))))
+  (future
+    (with-open [server-sock (ServerSocket. port)]
+      (while @running
+        (with-open [sock (.accept server-sock)]
+          (let [msg-in  (receive sock)
+                msg-out (handler msg-in)]
+            (send sock msg-out)))))))
 
 (defn start
   "Для того чтобы протестить tcp сервер

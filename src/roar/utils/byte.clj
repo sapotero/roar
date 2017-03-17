@@ -25,7 +25,6 @@
     conResult))
 
 (defn as-array [data]
-  (println data)
   (map
     #(hash-map :key (first %) :val (last %))
     (partition 2 (apply recursive-parse [] data))))
