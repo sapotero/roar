@@ -24,7 +24,7 @@
   "Для того чтобы протестить tcp сервер
    в репле выполнить:
     (roar.tcp.server/start)
-   
+
    а в консоле:
     cat some |nc localhost 6666"
   []

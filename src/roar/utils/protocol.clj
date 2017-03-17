@@ -18,6 +18,9 @@
     :else nil
     ))
 
+(defn to-int-seq
+  [string]
+  (vec (map #(int %) string)))
 
 (defn to-seq
   [string]
@@ -48,7 +51,7 @@
   ([result data c] (conj result (byte/bytes-to-int (take c data)) (drop c data))))
 
 (defn parse-frame [data]
-  (let [raw-result (parse [] (to-seq data) '(2 1 32))]
+  (let [raw-result (parse [] (to-int-seq data) '(2 1 32))]
     {
      :id (subvec raw-result 0)
      :command (subvec raw-result 1)
