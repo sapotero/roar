@@ -1,11 +1,14 @@
 (ns roar.utils.byte)
 
-(defn bytes-to-int [bytes]
-  (->>
-    bytes
-    (map (partial format "%02x"))
-    (apply (partial str "0x"))
-    read-string))
+(defn bytes-to-int
+  ([bytes]
+   (bytes-to-int (byte-array bytes) (count bytes) 0))
+  ([bytes len offset]
+   (reduce + 0
+     (map (fn [i]
+      (let [shift (* (- len 1 i) 8)]
+        (bit-shift-left (bit-and (nth bytes (+ i offset)) 0x000000FF) shift)))
+          (range 0 len)))))
 
 (defn take-key-val-length [packet]
   (let [keylen (->> packet (take 16) bytes-to-int)
