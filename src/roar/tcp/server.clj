@@ -4,23 +4,27 @@
 
 (def running (atom true))
 
+(defn to-seq
+  [string]
+  (map #(bit-and (int %) 0xFF) string))
+
 (defn receive
   [socket]
-  (.readLine (io/reader socket)))
+  (let [bb  (byte-array 65535)
+        rr (.read (io/input-stream socket) bb)] (take (- 65535 rr) (seq bb))) )
 
 (defn raw-handler
   [data]
-  (println (roar.protocol/parse-frame (str data)))
-  (roar.protocol/parse-frame (str data)))
+  (println (roar.protocol/parse-frame data))
+  (roar.protocol/parse-frame data))
 
 (defn start-server [port handler]
-  (future
-    (with-open [server-sock (ServerSocket. port)]
-      (while @running
-        (with-open [sock (.accept server-sock)]
-          (let [msg-in  (receive sock)
-                msg-out (handler msg-in)]
-            (send sock msg-out)))))))
+  (with-open [server-sock (ServerSocket. port)]
+    (while @running
+      (with-open [sock (.accept server-sock)]
+        (let [msg-in  (receive sock)
+              msg-out (handler msg-in)]
+          (send sock msg-out))))))
 
 (defn start
   "Для того чтобы протестить tcp сервер
