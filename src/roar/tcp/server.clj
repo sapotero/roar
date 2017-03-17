@@ -21,5 +21,12 @@
           (send sock msg-out))))))
 
 (defn start
+  "Для того чтобы протестить tcp сервер
+   в репле выполнить:
+    (roar.tcp.server/start)
+   
+   а в консоле:
+    cat some |nc localhost 6666"
   []
   (start-server 6666 raw-handler))
+
