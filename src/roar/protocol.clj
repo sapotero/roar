@@ -22,7 +22,7 @@
 (defn to-vec
   [string]
   (vec
-    (map #(int %) string)))
+    (map #(cond (> 0 %) (bit-and % 0xFF) true (int %)) string)))
 
 (defn parse-packet-data
   [data type]
