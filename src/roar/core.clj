@@ -1,13 +1,5 @@
 (ns roar.core)
-
-(require '[roar.protocol :as proto]
-         '[aleph.tcp :as tcp]
-         '[manifold.stream :as stream]
-         '[manifold.bus :as bus]
-         )
-
-
-
+(require '[roar.protocol :as proto] )
 
 (defprotocol Node
   (write!       [this data])
@@ -176,22 +168,22 @@
     ))
 
 
-(def bus (bus/event-bus))
-
-(defn handle-msg [byte-msg stream]
-  (println byte-msg)
-  (process byte-msg)
-  )
-
-(defn bus-handler [s info]
-  (do
-    (stream/connect (bus/subscribe bus "msg") s)
-    (stream/consume #(bus/publish! bus "msg" (handle-msg % s)) s)))
-
-(defn start-server
-  []
-  (tcp/start-server bus-handler {:port 8888}))
-
-(defn -main
-  []
-  (start-server))
+;(def bus (bus/event-bus))
+;
+;(defn handle-msg [byte-msg stream]
+;  (println byte-msg)
+;  (process byte-msg)
+;  )
+;
+;(defn bus-handler [s info]
+;  (do
+;    (stream/connect (bus/subscribe bus "msg") s)
+;    (stream/consume #(bus/publish! bus "msg" (handle-msg % s)) s)))
+;
+;(defn start-server
+;  []
+;  (tcp/start-server bus-handler {:port 8888}))
+;
+;(defn -main
+;  []
+;  (roar.tcp.server/start))
