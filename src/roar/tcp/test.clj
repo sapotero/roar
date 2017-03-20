@@ -8,13 +8,11 @@
              :refer [go >! chan <! >!! <!! go-loop close! map< split mapcat<]]
             [clojure.java.io :refer [reader writer]]))
 
-(def channel (chan 1e6))
-
 (defn listen-ch
   "return a channel which listens on port, values in the channel are scs of
    AsynchronousSocketChannel"
   ([port]
-   (listen-ch port channel))
+   (listen-ch port (chan)))
   ([port ch]
    (let [^AsynchronousServerSocketChannel listener
          (-> (AsynchronousServerSocketChannel/open)
@@ -65,7 +63,7 @@
                 (println "! Failed (write):" e (.getMessage e)))))))
 
 (defn simple [port]
-  (let [lc (listen-ch port channel)]
+  (let [lc (listen-ch port)]
     (go-loop [asc (<! lc)]
       (when asc
         (let [rc (read-ch  asc)]
