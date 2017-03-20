@@ -8,7 +8,7 @@
              :refer [go >! chan <! >!! <!! go-loop close! map< split mapcat<]]
             [clojure.java.io :refer [reader writer]]))
 
-(def channel (chan))
+(def channel (chan 1e6))
 
 (defn listen-ch
   "return a channel which listens on port, values in the channel are scs of
