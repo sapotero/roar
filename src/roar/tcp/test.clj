@@ -6,8 +6,7 @@
            [java.nio ByteBuffer])
   (:require [clojure.core.async
              :refer [go >! chan <! >!! <!! go-loop close! map< split mapcat<]]
-            [clojure.java.io :refer [reader writer]]
-            [taoensso.timbre :as timbre] ))
+            [clojure.java.io :refer [reader writer]]))
 
 (defn listen-ch
   "return a channel which listens on port, values in the channel are scs of
@@ -56,8 +55,7 @@
         (let [rc (read-ch asc)]
           (go-loop [bs (<! rc)]
             (when bs
-              (println "read: " (vec bs))
-              (roar.utils.protocol/parse-frame (String. bs))
+              (future (roar.utils.protocol/parse-frame (String. bs)))
               (recur (<! rc))))))
       (recur (<! lc)))))
 
