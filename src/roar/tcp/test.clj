@@ -71,7 +71,7 @@
         (let [rc (read-ch  asc)]
           (go-loop [bs (<! rc)]
             (when bs
-              (write-socket-channel asc @(future (roar.core/process (String. bs))) true)
+              (write-socket-channel asc (apply str @(future (roar.core/process (String. bs)))) true)
               (recur (<! rc))))))
       (recur (<! lc)))))
 
