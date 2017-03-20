@@ -52,7 +52,7 @@
 
 
 (defn write-socket-channel [channel string close?]
-  (let [bytes (.getBytes string)
+  (let [bytes (.getBytes (apply str string))
         buf (ByteBuffer/allocateDirect (.length string))]
     (.put buf bytes)
     (.rewind buf)
@@ -71,7 +71,7 @@
         (let [rc (read-ch  asc)]
           (go-loop [bs (<! rc)]
             (when bs
-              (write-socket-channel asc (apply str @(future (roar.core/process (String. bs)))) true)
+              @(future (write-socket-channel asc (roar.core/process (String. bs)) true))
               (recur (<! rc))))))
       (recur (<! lc)))))
 
