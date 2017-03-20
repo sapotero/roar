@@ -160,7 +160,7 @@
 
 (defn process [cmd]
   (let [packet (protocol/parse-frame cmd)]
-    (str (execute packet))
+    @(future (execute packet))
     )
   ;(println
   ;  (str
