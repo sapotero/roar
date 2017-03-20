@@ -1,4 +1,4 @@
-(ns roar.protocol)
+(ns roar.utils.protocol)
 (require '[roar.utils.byte :as byte])
 
 
