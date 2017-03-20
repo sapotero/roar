@@ -26,8 +26,9 @@
 (extend-type InMemoryReadWrite ReadWrite
   (write-key!
     [this data]
-   (dosync
-     (alter memory-store conj {(keyword (:key data)) (:val data)}))
+    (dosync
+      (alter memory-store conj {(keyword (:key data)) (:val data)}))
+
     )
   (read-key
     [this keys]
@@ -44,7 +45,10 @@
 (extend-type Master Node
   (write!
     [this data]
-    (write-key! (:rw-strategy this) data))
+    ;(map #(write-key! (:rw-strategy this) %) data)
+    (map #( write-key! (:rw-strategy this) % ) data)
+    ;(write-key! (:rw-strategy this) data)
+    )
 
   (read!
     [this keys]
@@ -98,8 +102,7 @@
 (extend-type Slave Node
   (write!
     [this data]
-    (-> @(:master this)
-        (:rw-strategy)
+    (-> @(:master this) (:rw-strategy)
         (write-key! data)))
   (read!
     [this k]
@@ -141,7 +144,6 @@
 
 (defn execute
   [packet]
-  (println packet)
   (let
     [
      command (protocol/get-command-type (-> packet :command))
@@ -152,17 +154,20 @@
       (= command :set) (write! master (get-in packet [:data :data]) )
       (= command :match-key)   ( find-in-keys!    master key )
       (= command :match-value) ( find-in-values!  master key )
-      :else nil
       )
 )
 )
 
 (defn process [cmd]
-  (println
-    (str
-      (execute
-        (protocol/parse-frame cmd)))
-    ))
+  (let [packet (protocol/parse-frame cmd)]
+    (str (execute packet))
+    )
+  ;(println
+  ;  (str
+  ;    (execute
+  ;      (protocol/parse-frame cmd)))
+  ;  )
+  )
 
 
 ;(def bus (bus/event-bus))

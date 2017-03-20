@@ -8,11 +8,13 @@
              :refer [go >! chan <! >!! <!! go-loop close! map< split mapcat<]]
             [clojure.java.io :refer [reader writer]]))
 
+(def channel (chan))
+
 (defn listen-ch
   "return a channel which listens on port, values in the channel are scs of
    AsynchronousSocketChannel"
   ([port]
-   (listen-ch port (chan)))
+   (listen-ch port channel))
   ([port ch]
    (let [^AsynchronousServerSocketChannel listener
          (-> (AsynchronousServerSocketChannel/open)
@@ -48,16 +50,31 @@
                   (.close asc))))))
    ch))
 
+
+(defn write-socket-channel [channel string close?]
+  (let [bytes (.getBytes string)
+        buf (ByteBuffer/allocateDirect (.length string))]
+    (.put buf bytes)
+    (.rewind buf)
+    (.write channel buf nil
+            (reify CompletionHandler
+              (completed [this cnt _]
+                (println "wrote" cnt))
+              (failed [this e _]
+                (.close channel)
+                (println "! Failed (write):" e (.getMessage e)))))))
+
 (defn simple [port]
-  (let [lc (listen-ch port)]
+  (let [lc (listen-ch port channel)]
     (go-loop [asc (<! lc)]
       (when asc
-        (let [rc (read-ch asc)]
+        (let [rc (read-ch  asc)]
           (go-loop [bs (<! rc)]
             (when bs
-              @(future (roar.core/process (String. bs)))
+              @(future (write-socket-channel asc (roar.core/process (String. bs)) true))
               (recur (<! rc))))))
       (recur (<! lc)))))
+
 
 (comment
   (split identity)
