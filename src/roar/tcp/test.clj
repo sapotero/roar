@@ -55,7 +55,7 @@
         (let [rc (read-ch asc)]
           (go-loop [bs (<! rc)]
             (when bs
-              (future (roar.utils.protocol/parse-frame (String. bs)))
+              @(future (roar.core/process (String. bs)))
               (recur (<! rc))))))
       (recur (<! lc)))))
 

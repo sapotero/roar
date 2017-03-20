@@ -26,14 +26,16 @@
 (extend-type InMemoryReadWrite ReadWrite
   (write-key!
     [this data]
-   `(alter memory-store conj {(keyword (:key ~data)) (:val ~data)})
+   (dosync
+     (alter memory-store conj {(keyword (:key data)) (:val data)}))
     )
   (read-key
     [this keys]
     (-> (select-keys @(:store this) (vec keys))))
   (replicate-key!
     [this data]
-    `(alter memory-store conj {(keyword (:key ~data)) (:val ~data)})
+    (dosync
+      (alter memory-store conj {(keyword (:key data)) (:val data)}))
     )
   )
 ;)
@@ -42,12 +44,7 @@
 (extend-type Master Node
   (write!
     [this data]
-    (eval
-      (conj
-        (map
-          (fn [x] (write-key! (:rw-strategy this) x))
-          data)
-        `dosync)))
+    (write-key! (:rw-strategy this) data))
 
   (read!
     [this keys]
