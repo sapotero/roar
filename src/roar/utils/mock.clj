@@ -1,6 +1,6 @@
 (ns roar.utils.mock)
 (require '[roar.utils.byte :as byte])
-(require '[roar.protocol :as protocol])
+(require '[roar.utils.protocol :as protocol])
 
 
 (defn generate-packet

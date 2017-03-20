@@ -1,5 +1,5 @@
 (ns roar.core)
-(require '[roar.protocol :as proto] )
+(require '[roar.utils.protocol :as protocol] )
 
 (defprotocol Node
   (write!       [this data])
@@ -147,7 +147,7 @@
   (println packet)
   (let
     [
-     command (roar.protocol/get-command-type (-> packet :command))
+     command (protocol/get-command-type (-> packet :command))
      value   (-> packet :data :value)
      ]
     (cond
@@ -164,7 +164,7 @@
   (println
     (str
       (execute
-        (roar.protocol/parse-frame cmd)))
+        (protocol/parse-frame cmd)))
     ))
 
 
