@@ -6,6 +6,8 @@
   :dependencies [
                  [org.clojure/clojure "1.8.0"]
                  [org.clojure/core.async "0.3.442"]
+                 [aleph "0.4.1-SNAPSHOT"]
+                 [gloss "0.2.6"]
                  ]
   :main roar.core
   :target-path "target/%s"
