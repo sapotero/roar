@@ -10,4 +10,5 @@
   :main roar.core
   :target-path "target/%s"
   :manifest {"Class-Path" "lib/clojure-1.8.0.jar"}
+  :java-source-paths ["src/java" "test/java"]
   )
