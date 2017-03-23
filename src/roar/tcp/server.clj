@@ -1,38 +1,60 @@
 (ns roar.tcp.server
-  (:require [clojure.java.io :as io])
-  (:import (java.net ServerSocket)))
+  (:import   [io.netty.bootstrap AbstractBootstrap ServerBootstrap]
+             [io.netty.channel ChannelFuture ChannelInitializer ChannelOption
+                               ChannelHandlerContext ChannelInboundHandlerAdapter ChannelHandler]
+             [io.netty.handler.logging LogLevel LoggingHandler]
+             io.netty.buffer.ByteBuf
+             io.netty.channel.socket.SocketChannel
+             io.netty.channel.nio.NioEventLoopGroup
+             io.netty.channel.socket.nio.NioServerSocketChannel
+             java.util.concurrent.atomic.AtomicInteger)
+  (:use [clojure.stacktrace])
+  (:gen-class))
 
-(def running (atom true))
+;; the actual server code
+(def echo-server-handler
+  (proxy [ChannelInboundHandlerAdapter] []
+    (channelRead [ctx msg]
+      (println msg)
+      (.write ctx msg))
+    (channelReadComplete [ctx]
+      (.flush ctx))
+    (exceptionCaught [ctx cause]
+      (print-stack-trace cause)
+      (.close ctx)
+      )))
 
-(defn to-seq
-  [string]
-  (map #(bit-and (int %) 0xFF) string))
+(defn create-tcp-server
+  [bossGroup workerGroup]
+  (->  (ServerBootstrap.)
+       (.group bossGroup workerGroup)
+       (.channel io.netty.channel.socket.nio.NioServerSocketChannel)
+       (.option  ChannelOption/SO_BACKLOG (int 80))
+       ;(.childOption ChannelOption/SO_KEEPALIVE true)
+       (.childHandler
+         (proxy [ChannelInitializer] []
+           (initChannel [ch]
+             (-> ch
+                 (.pipeline)
+                 (.addLast (echo-server-handler))))))
+       ))
 
-(defn receive
-  [socket]
-  (let [bb  (byte-array 65535)
-        rr (.read (io/input-stream socket) bb)] (take (- 65535 rr) (seq bb))) )
+(defn create-future-channel
+  [server]
+  (let [future
+        (-> server
+            (.bind 2323)
+            (.sync))]
+    (
+      (-> future
+          (.channel)
+          (.closeFuture)
+          (.sync))
+      )))
 
-(defn raw-handler
-  [data]
-  (println (roar.protocol/parse-frame data))
-  (roar.protocol/parse-frame data))
-
-(defn start-server [port handler]
-  (with-open [server-sock (ServerSocket. port)]
-    (while @running
-      (with-open [sock (.accept server-sock)]
-        (let [msg-in  (receive sock)
-              msg-out (handler msg-in)]
-          (send sock msg-out))))))
-
-(defn start
-  "Для того чтобы протестить tcp сервер
-   в репле выполнить:
-    (roar.tcp.server/start)
-
-   а в консоле:
-    cat some |nc localhost 6666"
-  []
-  (start-server 6666 raw-handler))
-
+(defn start []
+  (let [bossGroup   (NioEventLoopGroup.)
+        workerGroup (NioEventLoopGroup.)
+        server (create-tcp-server bossGroup workerGroup)
+        ]
+    (create-future-channel server)))

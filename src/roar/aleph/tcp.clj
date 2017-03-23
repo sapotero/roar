@@ -4,12 +4,11 @@
     [gloss.core :as gloss]
     [manifold.stream :as s]))
 
-
 (defn fast-echo-handler
   [f]
   (fn [s info]
     (s/connect
-      (s/stream->seq s)
+      (s/stream->seq (roar.core/process s))
       s)))
 
 

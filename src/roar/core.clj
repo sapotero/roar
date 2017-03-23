@@ -21,13 +21,12 @@
 (defrecord Slave  [rw-strategy name master])
 
 (defrecord InMemoryReadWrite [store])
-(def memory-store (ref {}))
+(def memory-store (atom {}))
 
 (extend-type InMemoryReadWrite ReadWrite
   (write-key!
     [this data]
-    (dosync
-      (alter memory-store conj {(keyword (:key data)) (:val data)}))
+    {(keyword (:key data)) (:val data)}
 
     )
   (read-key
