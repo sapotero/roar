@@ -1,38 +1,61 @@
 (ns roar.tcp.server
-  (:require [clojure.java.io :as io])
-  (:import (java.net ServerSocket)))
+  (:import
+    [java.net InetSocketAddress]
+    [io.netty.buffer Unpooled]
+    [io.netty.channel ChannelHandler ChannelInboundHandlerAdapter ChannelInitializer ChannelInitializer ChannelHandlerContext ChannelFutureListener]
+    [io.netty.channel.nio NioEventLoopGroup]
+    [io.netty.bootstrap ServerBootstrap]
+    [io.netty.buffer ByteBufUtil]
+    [io.netty.channel.socket.nio NioServerSocketChannel])
+  (:use [clojure.stacktrace])
+  (:gen-class))
 
-(def running (atom true))
 
-(defn to-seq
-  [string]
-  (map #(bit-and (int %) 0xFF) string))
+(defrecord Server [group channel-future])
 
-(defn receive
-  [socket]
-  (let [bb  (byte-array 65535)
-        rr (.read (io/input-stream socket) bb)] (take (- 65535 rr) (seq bb))) )
+(defn decode [msg] (vec (ByteBufUtil/getBytes msg)))
 
-(defn raw-handler
-  [data]
-  (println (roar.protocol/parse-frame data))
-  (roar.protocol/parse-frame data))
+(defn ^ChannelHandler echo-handler []
+  (proxy [ChannelInboundHandlerAdapter]
+         []
+    (channelRead [^ChannelHandlerContext ctx msg]
 
-(defn start-server [port handler]
-  (with-open [server-sock (ServerSocket. port)]
-    (while @running
-      (with-open [sock (.accept server-sock)]
-        (let [msg-in  (receive sock)
-              msg-out (handler msg-in)]
-          (send sock msg-out))))))
+      (prn "Received : " (roar.core/process (decode msg)))
+      (.writeAndFlush ctx msg))
+    (channelReadComplete [^ChannelHandlerContext ctx]
+      ;(-> ctx (.writeAndFlush Unpooled/EMPTY_BUFFER)
+      ; (.addListener ChannelFutureListener/CLOSE))
+      )
+    (exceptionCaught [^ChannelHandlerContext ctx cause]
+      (.close ctx))))
 
-(defn start
-  "Для того чтобы протестить tcp сервер
-   в репле выполнить:
-    (roar.tcp.server/start)
 
-   а в консоле:
-    cat some |nc localhost 6666"
-  []
-  (start-server 6666 raw-handler))
+(defn close-server [{:keys [group channel-future]}]
+  (-> channel-future .channel .closeFuture)
+  (.shutdownNow group))
 
+(defn ^ChannelInitializer channel-initializer []
+  (proxy [ChannelInitializer]
+         []
+    (initChannel [ch]
+      (-> ch (.pipeline) (.addLast (into-array ChannelHandler [(echo-handler)])))
+
+      )))
+
+;(defn thread-pool
+;  []
+;  (proxy [NioServerSocketChannelFactory] []))
+
+(defn start-server [port]
+  (let [group (NioEventLoopGroup.)
+        b (ServerBootstrap.)
+        ]
+    (-> b (.group group)
+        (.channel NioServerSocketChannel)
+        (.localAddress (InetSocketAddress. port))
+        (.childHandler (channel-initializer))
+        )
+    (->Server group (-> b .bind .sync))
+    ))
+
+(start-server 6325)
