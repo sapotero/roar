@@ -5,7 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [
                  [org.clojure/clojure "1.8.0"]
-                 [io.netty/netty-all "4.1.9.Final"]
+                 [org.jboss.netty/netty "3.2.5.Final"]
                  ]
   :main roar.core
   :target-path "target/%s"
